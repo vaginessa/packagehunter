@@ -19,9 +19,9 @@ import github.nisrulz.packagehunter.PkgInfo;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> data;
-    ArrayAdapter<String> adapter;
-    ListView lv;
+    private ArrayList<String> data;
+    private ArrayAdapter<String> adapter;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!editText.getText().equals("")) {
+                if (!editText.getText().toString().equals("")) {
                     data = getStringList(editText.getText().toString());
                     // update data in our adapter
                     adapter.clear();
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    ArrayList<String> getStringList(String querytext) {
+    private ArrayList<String> getStringList(String querytext) {
         ArrayList<PkgInfo> pkglist = PackageHunter.getInstance().getListOfPackages(getApplicationContext(), querytext);
         ArrayList<String> dataStringlist = new ArrayList<>();
         for (PkgInfo pkgInfo : pkglist) {

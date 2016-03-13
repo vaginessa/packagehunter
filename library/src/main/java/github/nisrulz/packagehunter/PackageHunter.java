@@ -13,7 +13,7 @@ import java.util.List;
 public class PackageHunter {
 
 
-    private static PackageHunter ourInstance = new PackageHunter();
+    private static final PackageHunter ourInstance = new PackageHunter();
 
     public static PackageHunter getInstance() {
         return ourInstance;

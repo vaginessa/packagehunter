@@ -1,9 +1,9 @@
 package github.nisrulz.packagehunter;
 
 public class PkgInfo {
-    String app_name;
-    String pkg_name;
-    String service_name;
+    private String app_name;
+    private String pkg_name;
+    private String service_name;
 
     public PkgInfo() {
     }

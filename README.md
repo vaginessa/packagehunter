@@ -1,5 +1,4 @@
-#PackageHunter    [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter) 
-
+#PackageHunter    [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter) [![Twitter](https://img.shields.io/badge/Twitter-@nisrulz-blue.svg?style=flat)](http://twitter.com/nisrulz)
 Android library to hunt down package information 
 
 #Integration

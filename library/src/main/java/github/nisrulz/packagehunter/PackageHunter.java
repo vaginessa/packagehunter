@@ -16,61 +16,78 @@
 
 package github.nisrulz.packagehunter;
 
-
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class PackageHunter {
 
+  private static final PackageHunter ourInstance = new PackageHunter();
+  private static final String TAG = "PackageHunter";
 
-    private static final PackageHunter ourInstance = new PackageHunter();
+  public static PackageHunter getInstance() {
+    return ourInstance;
+  }
 
-    public static PackageHunter getInstance() {
-        return ourInstance;
+  private PackageHunter() {
+  }
+
+  public ArrayList<PkgInfo> getInstalledPackages(Context context) {
+    ArrayList<PkgInfo> list = new ArrayList<>();
+
+    final PackageManager pm = context.getPackageManager();
+    List<PackageInfo> packages = pm.getInstalledPackages(0);
+
+    //get a list of installed packages.
+    for (int i = 0; i < packages.size(); i++) {
+      PackageInfo p = packages.get(i);
+      PkgInfo newInfo = new PkgInfo();
+      newInfo.setApp_name(p.applicationInfo.loadLabel(pm).toString());
+      newInfo.setPkg_name(p.packageName);
+      newInfo.setVersionCode(p.versionCode);
+      newInfo.setVersionName(p.versionName);
+      newInfo.setIcon(p.applicationInfo.loadIcon(pm));
+      list.add(newInfo);
+
+      // Log Data
+      System.out.println(newInfo.toString());
     }
+    return list;
+  }
 
-    private PackageHunter() {
-    }
+  public ArrayList<PkgInfo> getListOfPackages(Context context, String packageName) {
+    ArrayList<PkgInfo> list = new ArrayList<>();
 
+    final PackageManager pm = context.getPackageManager();
 
-    public ArrayList<PkgInfo> getListOfPackages(Context context, String packageName) {
-        ArrayList<PkgInfo> list = new ArrayList<>();
-
-        final PackageManager pm = context.getPackageManager();
-
-        //get a list of installed packages.
-        List<PackageInfo> serviceInfos = pm.getInstalledPackages(PackageManager.GET_SERVICES);
-        for (PackageInfo serviceInfo : serviceInfos) {
-            PkgInfo pkgInfo = new PkgInfo();
-            if (serviceInfo.services != null) {
-                for (ServiceInfo s : serviceInfo.services) {
-                    if (s.name.contains(packageName)) {
-                        ApplicationInfo ai;
-                        try {
-                            ai = pm.getApplicationInfo(s.packageName, 0);
-                        } catch (final PackageManager.NameNotFoundException e) {
-                            ai = null;
-                        }
-                        final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
-
-                        pkgInfo.setApp_name(applicationName);
-                        pkgInfo.setPkg_name(s.packageName);
-                        pkgInfo.setService_name(s.name);
-
-                        if (!list.contains(pkgInfo))
-                            list.add(pkgInfo);
-                    }
-                }
+    //get a list of installed packages.
+    List<PackageInfo> serviceInfos = pm.getInstalledPackages(PackageManager.GET_SERVICES);
+    for (PackageInfo serviceInfo : serviceInfos) {
+      PkgInfo pkgInfo = new PkgInfo();
+      if (serviceInfo.services != null) {
+        for (ServiceInfo s : serviceInfo.services) {
+          if (s.name.contains(packageName)) {
+            ApplicationInfo ai;
+            try {
+              ai = pm.getApplicationInfo(s.packageName, 0);
+            } catch (final PackageManager.NameNotFoundException e) {
+              ai = null;
             }
+            final String applicationName =
+                (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+
+            pkgInfo.setApp_name(applicationName);
+            pkgInfo.setPkg_name(s.packageName);
+
+            if (!list.contains(pkgInfo)) list.add(pkgInfo);
+          }
         }
-
-        return list;
-
+      }
     }
+    return list;
+  }
 }

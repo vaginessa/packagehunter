@@ -16,35 +16,69 @@
 
 package github.nisrulz.packagehunter;
 
+import android.graphics.drawable.Drawable;
+
 public class PkgInfo {
-    private String app_name;
-    private String pkg_name;
-    private String service_name;
+  private String app_name;
+  private String pkg_name;
+  private String versionName = "0.0";
+  private int versionCode = 0;
+  private Drawable icon;
 
-    public PkgInfo() {
-    }
+  public PkgInfo() {
+  }
 
-    public String getApp_name() {
-        return app_name;
-    }
+  public String getApp_name() {
+    return app_name;
+  }
 
-    public void setApp_name(String app_name) {
-        this.app_name = app_name;
-    }
+  public void setApp_name(String app_name) {
+    this.app_name = app_name;
+  }
 
-    public String getPkg_name() {
-        return pkg_name;
-    }
+  public String getPkg_name() {
+    return pkg_name;
+  }
 
-    public void setPkg_name(String pkg_name) {
-        this.pkg_name = pkg_name;
-    }
+  public void setPkg_name(String pkg_name) {
+    this.pkg_name = pkg_name;
+  }
 
-    public String getService_name() {
-        return service_name;
-    }
+  public Drawable getIcon() {
+    return icon;
+  }
 
-    public void setService_name(String service_name) {
-        this.service_name = service_name;
-    }
+  public void setIcon(Drawable icon) {
+    this.icon = icon;
+  }
+
+  public int getVersionCode() {
+    return versionCode;
+  }
+
+  public void setVersionCode(int versionCode) {
+    this.versionCode = versionCode;
+  }
+
+  public String getVersionName() {
+    return versionName;
+  }
+
+  public void setVersionName(String versionName) {
+    this.versionName = versionName;
+  }
+
+  @Override public String toString() {
+    super.toString();
+    String data = "AppName : "
+        + app_name
+        + " | PackageName :"
+        + pkg_name
+        + "\nVersion :"
+        + versionName
+        + " | VersionCode :"
+        + versionCode;
+    return data;
+  }
 }
+

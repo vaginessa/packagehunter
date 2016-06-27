@@ -32,11 +32,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-  RecyclerView rv;
-  ArrayList<PkgInfo> pkgInfoArrayList;
-  RVAdapter adapter;
+  private RecyclerView rv;
+  private ArrayList<PkgInfo> pkgInfoArrayList;
+  private RVAdapter adapter;
 
-  PackageHunter packageHunter;
+  private PackageHunter packageHunter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

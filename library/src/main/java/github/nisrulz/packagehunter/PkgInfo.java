@@ -70,7 +70,7 @@ public class PkgInfo {
 
   @Override public String toString() {
     super.toString();
-    String data = "AppName : "
+    return "AppName : "
         + app_name
         + " | PackageName :"
         + pkg_name
@@ -78,7 +78,6 @@ public class PkgInfo {
         + versionName
         + " | VersionCode :"
         + versionCode;
-    return data;
   }
 }
 

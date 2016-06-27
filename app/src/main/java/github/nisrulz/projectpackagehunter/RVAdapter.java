@@ -11,7 +11,7 @@ import java.util.List;
 
 class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
-  List<PkgInfo> dataList;
+  private List<PkgInfo> dataList;
 
   public RVAdapter(List<PkgInfo> dataList) {
     this.dataList = dataList;
@@ -37,8 +37,11 @@ class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
   }
 
   public class ItemViewHolder extends RecyclerView.ViewHolder {
-    TextView txt_appname, txt_pkgname, txt_versioncode, txt_version;
-    ImageView icon;
+    final TextView txt_appname;
+    final TextView txt_pkgname;
+    final TextView txt_versioncode;
+    final TextView txt_version;
+    final ImageView icon;
 
     public ItemViewHolder(View itemView) {
       super(itemView);

@@ -29,7 +29,6 @@ public class PackageHunter {
 
   private static final String TAG = "PackageHunter";
 
-  private final Context context;
   private final PackageManager packageManager;
   private List<PackageInfo> installed_packages_list;
 
@@ -41,7 +40,6 @@ public class PackageHunter {
   public static final int RECEIVERS = 4;
 
   public PackageHunter(Context context) {
-    this.context = context;
     packageManager = context.getPackageManager();
   }
 

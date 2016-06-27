@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +30,16 @@ public class PackageHunter {
   private static final String TAG = "PackageHunter";
 
   private final Context context;
+  private final PackageManager pm;
 
   public PackageHunter(Context context) {
     this.context = context;
+    pm = context.getPackageManager();
   }
 
   public ArrayList<PkgInfo> getInstalledPackages() {
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
-    final PackageManager pm = context.getPackageManager();
     List<PackageInfo> packages = pm.getInstalledPackages(0);
 
     //get a list of installed packages.
@@ -45,53 +47,35 @@ public class PackageHunter {
       PackageInfo p = packages.get(i);
 
       if (!p.packageName.contains("com.android.")) {
-        PkgInfo newInfo = new PkgInfo();
-        newInfo.setApp_name(p.applicationInfo.loadLabel(pm).toString());
-        newInfo.setPkg_name(p.packageName);
-        newInfo.setVersionCode(p.versionCode);
-        newInfo.setVersionName(p.versionName);
-        newInfo.setIcon(p.applicationInfo.loadIcon(pm));
-        pkgInfoArrayList.add(newInfo);
-
-        // Log Data
-        System.out.println(newInfo.toString());
+        pkgInfoArrayList.add(getPkgInfoModel(p));
       }
     }
     return pkgInfoArrayList;
   }
 
   public ArrayList<PkgInfo> searchForPackageName(final String package_name) {
-    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
-    ArrayList<PkgInfo> list = new ArrayList<>();
+    String query = package_name.toLowerCase();
+    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
     final PackageManager pm = context.getPackageManager();
     List<PackageInfo> packages = pm.getInstalledPackages(0);
 
-    //get a list of installed packages.
+    //get a pkgInfoArrayList of installed packages.
     for (int i = 0; i < packages.size(); i++) {
       PackageInfo p = packages.get(i);
 
       String pkgeName = p.packageName;
-      if (pkgeName.equals(package_name)) {
-        PkgInfo newInfo = new PkgInfo();
-        newInfo.setApp_name(p.applicationInfo.loadLabel(pm).toString());
-        newInfo.setPkg_name(pkgeName);
-        newInfo.setVersionCode(p.versionCode);
-        newInfo.setVersionName(p.versionName);
-        newInfo.setIcon(p.applicationInfo.loadIcon(pm));
-        list.add(newInfo);
-        // Log Data
-        System.out.println(newInfo.toString());
+      if (pkgeName.toLowerCase().equals(query)) {
+        pkgInfoArrayList.add(getPkgInfoModel(p));
       }
     }
-    return list;
+    return pkgInfoArrayList;
   }
 
   public ArrayList<PkgInfo> searchForApplicationName(final String application_name) {
-    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
-    ArrayList<PkgInfo> list = new ArrayList<>();
+    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
     final PackageManager pm = context.getPackageManager();
     List<PackageInfo> packages = pm.getInstalledPackages(0);
@@ -102,22 +86,14 @@ public class PackageHunter {
 
       String appname = p.applicationInfo.loadLabel(pm).toString();
       if (appname.equals(application_name)) {
-        PkgInfo newInfo = new PkgInfo();
-        newInfo.setApp_name(appname);
-        newInfo.setPkg_name(p.packageName);
-        newInfo.setVersionCode(p.versionCode);
-        newInfo.setVersionName(p.versionName);
-        newInfo.setIcon(p.applicationInfo.loadIcon(pm));
-        list.add(newInfo);
-        // Log Data
-        System.out.println(newInfo.toString());
+        pkgInfoArrayList.add(getPkgInfoModel(p));
       }
     }
-    return list;
+    return pkgInfoArrayList;
   }
 
-  public ArrayList<PkgInfo> seatchForServices(final String service_name) {
-    ArrayList<PkgInfo> list = new ArrayList<>();
+  public ArrayList<PkgInfo> searchForServices(final String service_name) {
+    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
     final PackageManager pm = context.getPackageManager();
 
@@ -139,12 +115,26 @@ public class PackageHunter {
 
             pkgInfo.setApp_name(applicationName);
             pkgInfo.setPkg_name(s.packageName);
-            if (!list.contains(pkgInfo)) list.add(pkgInfo);
+            if (!pkgInfoArrayList.contains(pkgInfo)) pkgInfoArrayList.add(pkgInfo);
           }
         }
       }
     }
-    return list;
+    return pkgInfoArrayList;
+  }
+
+  private PkgInfo getPkgInfoModel(PackageInfo p) {
+    PkgInfo newInfo = new PkgInfo();
+    newInfo.setApp_name(p.applicationInfo.loadLabel(pm).toString());
+    newInfo.setPkg_name(p.packageName);
+    newInfo.setVersionCode(p.versionCode);
+    newInfo.setVersionName(p.versionName);
+    newInfo.setIcon(p.applicationInfo.loadIcon(pm));
+
+    // Log Data
+    Log.d(TAG, newInfo.toString());
+
+    return newInfo;
   }
 
   //

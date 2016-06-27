@@ -17,10 +17,15 @@
 package github.nisrulz.projectpackagehunter;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import github.nisrulz.packagehunter.PackageHunter;
 import github.nisrulz.packagehunter.PkgInfo;
 import java.util.ArrayList;
@@ -31,13 +36,15 @@ public class MainActivity extends AppCompatActivity {
   ArrayList<PkgInfo> data;
   RVAdapter adapter;
 
+  PackageHunter packageHunter;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    PackageHunter packageHunter = new PackageHunter(this);
+    packageHunter = new PackageHunter(this);
 
     rv = (RecyclerView) findViewById(R.id.rv_pkglist);
     data = packageHunter.getInstalledPackages();
@@ -46,5 +53,30 @@ public class MainActivity extends AppCompatActivity {
     rv.hasFixedSize();
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
+  }
+
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_main, menu);
+    MenuItem searchViewItem = menu.findItem(R.id.action_search);
+    final SearchView searchViewAndroidActionBar =
+        (SearchView) MenuItemCompat.getActionView(searchViewItem);
+    searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override public boolean onQueryTextSubmit(String query) {
+        searchViewAndroidActionBar.clearFocus();
+        return true;
+      }
+
+      @Override public boolean onQueryTextChange(String query) {
+        data = packageHunter.searchForPackageName(query);
+
+        for (int i = 0; i < data.size(); i++) {
+          System.out.println(data.get(i).toString());
+        }
+
+        return false;
+      }
+    });
+    return super.onCreateOptionsMenu(menu);
   }
 }

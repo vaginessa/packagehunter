@@ -14,13 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <android.support.v7.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rv_pkglist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@+id/editText"
     android:layout_marginTop="?attr/actionBarSize"
     />
 

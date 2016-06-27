@@ -14,7 +14,9 @@
   ~ limitations under the License.
   -->
 
-<manifest package="github.nisrulz.packagehunter">
-    <application>
-    </application>
+<manifest
+    package="github.nisrulz.packagehunter">
+
+  <application>
+  </application>
 </manifest>

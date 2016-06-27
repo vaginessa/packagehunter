@@ -1,0 +1,52 @@
+package github.nisrulz.projectpackagehunter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import github.nisrulz.packagehunter.PkgInfo;
+import java.util.List;
+
+class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
+
+  List<PkgInfo> dataList;
+
+  public RVAdapter(List<PkgInfo> dataList) {
+    this.dataList = dataList;
+  }
+
+  @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_item, parent, false);
+
+    return new ItemViewHolder(view);
+  }
+
+  @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
+    holder.txt_appname.setText(dataList.get(position).getApp_name());
+    holder.txt_pkgname.setText(dataList.get(position).getPkg_name());
+    holder.txt_versioncode.setText(String.valueOf(dataList.get(position).getVersionCode()));
+    holder.txt_version.setText(dataList.get(position).getVersionName());
+    holder.icon.setImageDrawable(dataList.get(position).getIcon());
+  }
+
+  @Override public int getItemCount() {
+    return dataList.size();
+  }
+
+  public class ItemViewHolder extends RecyclerView.ViewHolder {
+    TextView txt_appname, txt_pkgname, txt_versioncode, txt_version;
+    ImageView icon;
+
+    public ItemViewHolder(View itemView) {
+      super(itemView);
+      txt_appname = (TextView) itemView.findViewById(R.id.pkginfo_name);
+      txt_pkgname = (TextView) itemView.findViewById(R.id.pkginfo_pkg);
+      txt_version = (TextView) itemView.findViewById(R.id.pkginfo_vname);
+      txt_versioncode = (TextView) itemView.findViewById(R.id.pkginfo_vc);
+      icon = (ImageView) itemView.findViewById(R.id.pkginfo_icn);
+    }
+  }
+}

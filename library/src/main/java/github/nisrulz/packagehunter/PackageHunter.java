@@ -19,8 +19,8 @@ package github.nisrulz.packagehunter;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ServiceInfo;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,101 +30,118 @@ public class PackageHunter {
   private static final String TAG = "PackageHunter";
 
   private final Context context;
-  private final PackageManager pm;
+  private final PackageManager packageManager;
+  private List<PackageInfo> installed_packages_list;
+
+  // Flags
+  public static final int APPLICATIONS = 0;
+  public static final int PACKAGES = 1;
+  public static final int PERMISSIONS = 2;
+  public static final int SERVICES = 3;
+  public static final int RECEIVERS = 4;
 
   public PackageHunter(Context context) {
     this.context = context;
-    pm = context.getPackageManager();
+    packageManager = context.getPackageManager();
   }
 
   public ArrayList<PkgInfo> getInstalledPackages() {
+    return getAllPackageInfo(PACKAGES);
+  }
+
+  private ArrayList<PkgInfo> getAllPackageInfo(int flag) {
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-    List<PackageInfo> packages = pm.getInstalledPackages(0);
+    switch (flag) {
+      case PACKAGES:
+        installed_packages_list = packageManager.getInstalledPackages(0);
+        break;
+      case PERMISSIONS:
+        installed_packages_list =
+            packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
+        break;
+      case SERVICES:
+        installed_packages_list = packageManager.getInstalledPackages(PackageManager.GET_SERVICES);
+        break;
+      case RECEIVERS:
+        installed_packages_list = packageManager.getInstalledPackages(PackageManager.GET_RECEIVERS);
+        break;
+    }
 
     //get a list of installed packages.
-    for (int i = 0; i < packages.size(); i++) {
-      PackageInfo p = packages.get(i);
-      if (!p.packageName.contains("com.android.")) {
-        pkgInfoArrayList.add(getPkgInfoModel(p));
+    for (int i = 0; i < installed_packages_list.size(); i++) {
+      PackageInfo packageInfo = installed_packages_list.get(i);
+      if (!packageInfo.packageName.contains("com.android.")) {
+        pkgInfoArrayList.add(getPkgInfoModel(packageInfo));
       }
     }
     return pkgInfoArrayList;
   }
 
-  public ArrayList<PkgInfo> searchForPackageName(final String package_name) {
-    String query = package_name.toLowerCase();
+  public ArrayList<PkgInfo> searchInList(String query, int flag) {
+    String query_lowercase = query.toLowerCase();
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-    final PackageManager pm = context.getPackageManager();
-    List<PackageInfo> packages = pm.getInstalledPackages(0);
+    getAllPackageInfo(flag);
 
-    //get a pkgInfoArrayList of installed packages.
-    for (int i = 0; i < packages.size(); i++) {
-      PackageInfo p = packages.get(i);
+    String constant_tocheck = null;
+    PackageItemInfo[] packageItemInfoArray = null;
 
-      String pkgeName = p.packageName;
-      if (pkgeName.toLowerCase().contains(query)) {
-        pkgInfoArrayList.add(getPkgInfoModel(p));
+    for (int i = 0; i < installed_packages_list.size(); i++) {
+      PackageInfo packageInfo = installed_packages_list.get(i);
+
+      switch (flag) {
+        case APPLICATIONS:
+          constant_tocheck = packageInfo.applicationInfo.loadLabel(packageManager).toString();
+          break;
+        case PACKAGES:
+          constant_tocheck = packageInfo.packageName;
+          break;
+        case PERMISSIONS:
+          packageItemInfoArray = packageInfo.permissions;
+          break;
+        case SERVICES:
+          packageItemInfoArray = packageInfo.services;
+          break;
+        case RECEIVERS:
+          packageItemInfoArray = packageInfo.receivers;
+          break;
       }
-    }
-    return pkgInfoArrayList;
-  }
 
-  public ArrayList<PkgInfo> searchForApplicationName(final String application_name) {
-    String query = application_name.toLowerCase();
-    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-    final PackageManager pm = context.getPackageManager();
-    List<PackageInfo> packages = pm.getInstalledPackages(0);
+      if (packageItemInfoArray != null) {
+        PackageItemInfo packageItemInfo = null;
+        for (int j = 0; j < packageItemInfoArray.length; j++) {
+          switch (flag) {
+            case PERMISSIONS:
+              packageItemInfo = installed_packages_list.get(i).permissions[j];
+              break;
+            case SERVICES:
+              packageItemInfo = installed_packages_list.get(i).services[j];
+              break;
+            case RECEIVERS:
+              packageItemInfo = installed_packages_list.get(i).receivers[j];
+              break;
+          }
 
-    //get a list of installed packages.
-    for (int i = 0; i < packages.size(); i++) {
-      PackageInfo p = packages.get(i);
-
-      String appname = p.applicationInfo.loadLabel(pm).toString();
-      if (appname.toLowerCase().contains(query)) {
-        pkgInfoArrayList.add(getPkgInfoModel(p));
-      }
-    }
-    return pkgInfoArrayList;
-  }
-
-  public ArrayList<PkgInfo> searchForServices(final String service_name) {
-    ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-
-    final PackageManager pm = context.getPackageManager();
-
-    //get a list of installed packages.
-    List<PackageInfo> serviceInfos = pm.getInstalledPackages(PackageManager.GET_SERVICES);
-    for (PackageInfo serviceInfo : serviceInfos) {
-      PkgInfo pkgInfo = new PkgInfo();
-      if (serviceInfo.services != null) {
-        for (ServiceInfo s : serviceInfo.services) {
-          if (s.name.contains(service_name)) {
-            ApplicationInfo ai;
-            try {
-              ai = pm.getApplicationInfo(s.packageName, 0);
-            } catch (final PackageManager.NameNotFoundException e) {
-              ai = null;
-            }
-            final String applicationName =
-                (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
-
-            pkgInfo.setApp_name(applicationName);
-            pkgInfo.setPkg_name(s.packageName);
-            if (!pkgInfoArrayList.contains(pkgInfo)) pkgInfoArrayList.add(pkgInfo);
+          if (packageItemInfo != null && packageItemInfo.name.toLowerCase().contains(query)) {
+            pkgInfoArrayList.add(getPkgInfoModel(packageInfo, packageItemInfo));
           }
         }
       }
+
+      if (constant_tocheck != null && constant_tocheck.toLowerCase().contains(query_lowercase)) {
+        pkgInfoArrayList.add(getPkgInfoModel(packageInfo));
+      }
     }
+
     return pkgInfoArrayList;
   }
 
   private PkgInfo getPkgInfoModel(PackageInfo p) {
     PkgInfo newInfo = new PkgInfo();
-    newInfo.setApp_name(p.applicationInfo.loadLabel(pm).toString());
+    newInfo.setApp_name(p.applicationInfo.loadLabel(packageManager).toString());
     newInfo.setPkg_name(p.packageName);
     newInfo.setVersionCode(p.versionCode);
     newInfo.setVersionName(p.versionName);
-    newInfo.setIcon(p.applicationInfo.loadIcon(pm));
+    newInfo.setIcon(p.applicationInfo.loadIcon(packageManager));
 
     // Log Data
     Log.d(TAG, newInfo.toString());
@@ -132,33 +149,27 @@ public class PackageHunter {
     return newInfo;
   }
 
-  //
-  //public ArrayList<PkgInfo> searchForAppsWithPermission(final String permission) {
-  //  ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-  //
-  //  PackageManager pm = context.getPackageManager();
-  //  List packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-  //  for (ApplicationInfo applicationInfo : packages) {
-  //    Log.d("test", "App: " + applicationInfo.name + " Package: " + applicationInfo.packageName);
-  //    try {
-  //      PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName, PackageManager.GET_PERMISSIONS);
-  //      //Get Permissions
-  //      String[] requestedPermissions = packageInfo.requestedPermissions;
-  //      if(requestedPermissions != null) {
-  //        for (int i = 0; i < requestedPermissions.length; i++) {
-  //          Log.d("test", requestedPermissions[i]);
-  //
-  //          //////////////////////////////////////
-  //          //////////////////////////////////////
-  //          // Look for the desired permission here
-  //          //////////////////////////////////////
-  //          //////////////////////////////////////
-  //        }
-  //      }
-  //    } catch (PackageManager.NameNotFoundException e) {
-  //      e.printStackTrace();
-  //    }
-  //  }
-  //  return pkgInfoArrayList;
-  //}
+  private PkgInfo getPkgInfoModel(PackageInfo p, PackageItemInfo packageItemInfo) {
+    PkgInfo newInfo = new PkgInfo();
+
+    ApplicationInfo ai;
+    try {
+      ai = packageManager.getApplicationInfo(p.packageName, 0);
+    } catch (final PackageManager.NameNotFoundException e) {
+      ai = null;
+    }
+    final String applicationName =
+        (String) (ai != null ? packageManager.getApplicationLabel(ai) : "(unknown)");
+
+    newInfo.setApp_name(applicationName);
+    newInfo.setPkg_name(packageItemInfo.packageName);
+    newInfo.setVersionCode(p.versionCode);
+    newInfo.setVersionName(p.versionName);
+    newInfo.setIcon(p.applicationInfo.loadIcon(packageManager));
+
+    // Log Data
+    Log.d(TAG, newInfo.toString());
+
+    return newInfo;
+  }
 }

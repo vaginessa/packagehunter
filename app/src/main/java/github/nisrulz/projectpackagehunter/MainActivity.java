@@ -64,14 +64,12 @@ public class MainActivity extends AppCompatActivity {
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override public boolean onQueryTextSubmit(String query) {
         searchViewAndroidActionBar.clearFocus();
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.APPLICATIONS);
+        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PERMISSIONS);
         adapter.updateWithNewListData(pkgInfoArrayList);
         return true;
       }
 
       @Override public boolean onQueryTextChange(String query) {
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.SERVICES);
-        adapter.updateWithNewListData(pkgInfoArrayList);
         return false;
       }
     });

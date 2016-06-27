@@ -39,13 +39,11 @@ public class PackageHunter {
 
   public ArrayList<PkgInfo> getInstalledPackages() {
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-
     List<PackageInfo> packages = pm.getInstalledPackages(0);
 
     //get a list of installed packages.
     for (int i = 0; i < packages.size(); i++) {
       PackageInfo p = packages.get(i);
-
       if (!p.packageName.contains("com.android.")) {
         pkgInfoArrayList.add(getPkgInfoModel(p));
       }
@@ -54,10 +52,8 @@ public class PackageHunter {
   }
 
   public ArrayList<PkgInfo> searchForPackageName(final String package_name) {
-
     String query = package_name.toLowerCase();
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-
     final PackageManager pm = context.getPackageManager();
     List<PackageInfo> packages = pm.getInstalledPackages(0);
 
@@ -66,7 +62,7 @@ public class PackageHunter {
       PackageInfo p = packages.get(i);
 
       String pkgeName = p.packageName;
-      if (pkgeName.toLowerCase().equals(query)) {
+      if (pkgeName.toLowerCase().contains(query)) {
         pkgInfoArrayList.add(getPkgInfoModel(p));
       }
     }
@@ -74,9 +70,8 @@ public class PackageHunter {
   }
 
   public ArrayList<PkgInfo> searchForApplicationName(final String application_name) {
-
+    String query = application_name.toLowerCase();
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
-
     final PackageManager pm = context.getPackageManager();
     List<PackageInfo> packages = pm.getInstalledPackages(0);
 
@@ -85,7 +80,7 @@ public class PackageHunter {
       PackageInfo p = packages.get(i);
 
       String appname = p.applicationInfo.loadLabel(pm).toString();
-      if (appname.equals(application_name)) {
+      if (appname.toLowerCase().contains(query)) {
         pkgInfoArrayList.add(getPkgInfoModel(p));
       }
     }

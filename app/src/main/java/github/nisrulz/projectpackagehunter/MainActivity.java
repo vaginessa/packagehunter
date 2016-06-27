@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
   RecyclerView rv;
-  ArrayList<PkgInfo> data;
+  ArrayList<PkgInfo> pkgInfoArrayList;
   RVAdapter adapter;
 
   PackageHunter packageHunter;
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     packageHunter = new PackageHunter(this);
 
     rv = (RecyclerView) findViewById(R.id.rv_pkglist);
-    data = packageHunter.getInstalledPackages();
+    pkgInfoArrayList = packageHunter.getInstalledPackages();
 
-    adapter = new RVAdapter(data);
+    adapter = new RVAdapter(pkgInfoArrayList);
     rv.hasFixedSize();
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
@@ -64,16 +64,14 @@ public class MainActivity extends AppCompatActivity {
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override public boolean onQueryTextSubmit(String query) {
         searchViewAndroidActionBar.clearFocus();
+        pkgInfoArrayList = packageHunter.searchForPackageName(query);
+        adapter.updateWithNewListData(pkgInfoArrayList);
         return true;
       }
 
       @Override public boolean onQueryTextChange(String query) {
-        data = packageHunter.searchForPackageName(query);
-
-        for (int i = 0; i < data.size(); i++) {
-          System.out.println(data.get(i).toString());
-        }
-
+        pkgInfoArrayList = packageHunter.searchForPackageName(query);
+        adapter.updateWithNewListData(pkgInfoArrayList);
         return false;
       }
     });

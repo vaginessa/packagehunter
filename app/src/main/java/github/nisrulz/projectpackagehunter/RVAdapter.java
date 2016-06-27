@@ -49,4 +49,11 @@ class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
       icon = (ImageView) itemView.findViewById(R.id.pkginfo_icn);
     }
   }
+
+  public void updateWithNewListData(List<PkgInfo> newDataList) {
+    dataList.clear();
+    dataList = null;
+    dataList = newDataList;
+    notifyDataSetChanged();
+  }
 }

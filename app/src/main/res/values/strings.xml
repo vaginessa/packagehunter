@@ -15,5 +15,5 @@
   -->
 
 <resources>
-    <string name="app_name">PackageHunter</string>
+    <string name="appName">PackageHunter</string>
 </resources>

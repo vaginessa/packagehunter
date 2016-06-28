@@ -53,6 +53,51 @@ public class MainActivity extends AppCompatActivity {
     rv.hasFixedSize();
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
+
+    PkgInfo pkgInfo =
+        packageHunter.getSpecificPackageInfo("com.google.android.launcher", PackageHunter.PERMISSIONS);
+
+    if (pkgInfo.getRequestedPermissions() != null) {
+      for (int i = 0; i < pkgInfo.getRequestedPermissions().length; i++) {
+        System.out.println(pkgInfo.getRequestedPermissions()[i]);
+      }
+    }
+
+    if (pkgInfo.getProviderInfos() != null) {
+      for (int i = 0; i < pkgInfo.getProviderInfos().length; i++) {
+        System.out.println(pkgInfo.getProviderInfos()[i]);
+      }
+    }
+
+    if (pkgInfo.getServiceInfos() != null) {
+      for (int i = 0; i < pkgInfo.getServiceInfos().length; i++) {
+        System.out.println(pkgInfo.getServiceInfos()[i]);
+      }
+    }
+
+    if (pkgInfo.getReceiversInfo() != null) {
+      for (int i = 0; i < pkgInfo.getReceiversInfo().length; i++) {
+        System.out.println(pkgInfo.getReceiversInfo()[i]);
+      }
+    }
+
+    if (pkgInfo.getActivityInfos() != null) {
+      for (int i = 0; i < pkgInfo.getActivityInfos().length; i++) {
+        System.out.println(pkgInfo.getActivityInfos()[i]);
+      }
+    }
+
+    if (pkgInfo.getConfigurationInfos() != null) {
+      for (int i = 0; i < pkgInfo.getConfigurationInfos().length; i++) {
+        System.out.println(pkgInfo.getConfigurationInfos()[i]);
+      }
+    }
+
+    if (pkgInfo.getFeatureInfos() != null) {
+      for (int i = 0; i < pkgInfo.getFeatureInfos().length; i++) {
+        System.out.println(pkgInfo.getFeatureInfos()[i]);
+      }
+    }
   }
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {

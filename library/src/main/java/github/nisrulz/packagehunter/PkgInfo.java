@@ -22,8 +22,10 @@ import android.content.pm.FeatureInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class PkgInfo {
+public class PkgInfo implements Parcelable {
   private String appName;
   private String packageName;
   private String versionName;
@@ -51,6 +53,32 @@ public class PkgInfo {
     providerInfos = null;
     receiversInfo = null;
   }
+
+  protected PkgInfo(Parcel in) {
+    appName = in.readString();
+    packageName = in.readString();
+    versionName = in.readString();
+    versionCode = in.readInt();
+    firstInstallTime = in.readLong();
+    lastUpdateTime = in.readLong();
+    activityInfos = in.createTypedArray(ActivityInfo.CREATOR);
+    configurationInfos = in.createTypedArray(ConfigurationInfo.CREATOR);
+    featureInfos = in.createTypedArray(FeatureInfo.CREATOR);
+    requestedPermissions = in.createStringArray();
+    providerInfos = in.createTypedArray(ProviderInfo.CREATOR);
+    receiversInfo = in.createTypedArray(ActivityInfo.CREATOR);
+    serviceInfos = in.createTypedArray(ServiceInfo.CREATOR);
+  }
+
+  public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
+    @Override public PkgInfo createFromParcel(Parcel in) {
+      return new PkgInfo(in);
+    }
+
+    @Override public PkgInfo[] newArray(int size) {
+      return new PkgInfo[size];
+    }
+  };
 
   public ActivityInfo[] getReceiversInfo() {
     return receiversInfo;
@@ -176,6 +204,26 @@ public class PkgInfo {
         + versionName
         + " | VersionCode :"
         + versionCode;
+  }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(appName);
+    parcel.writeString(packageName);
+    parcel.writeString(versionName);
+    parcel.writeInt(versionCode);
+    parcel.writeLong(firstInstallTime);
+    parcel.writeLong(lastUpdateTime);
+    parcel.writeTypedArray(activityInfos, i);
+    parcel.writeTypedArray(configurationInfos, i);
+    parcel.writeTypedArray(featureInfos, i);
+    parcel.writeStringArray(requestedPermissions);
+    parcel.writeTypedArray(providerInfos, i);
+    parcel.writeTypedArray(receiversInfo, i);
+    parcel.writeTypedArray(serviceInfos, i);
   }
 }
 

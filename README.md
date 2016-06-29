@@ -1,39 +1,41 @@
-#PackageHunter    [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter) [![Twitter](https://img.shields.io/badge/Twitter-@nisrulz-blue.svg?style=flat)](http://twitter.com/nisrulz)
-Android library to hunt down package information 
+![Image](https://github.com/nisrulz/packagehunter/blob/master/img/github_banner.png)
 
-#Integration
+
+### Specs
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter)
+
+### Show some :heart:
+[![GitHub stars](https://img.shields.io/github/stars/nisrulz/packagehunter.svg?style=social&label=Star)](https://github.com/nisrulz/packagehunter) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/packagehunter.svg?style=social&label=Fork)](https://github.com/nisrulz/packagehunter/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/packagehunter.svg?style=social&label=Watch)](https://github.com/nisrulz/packagehunter) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz) 
+
+
+Android library to hunt down package information.
+
+The library is built for simplicity and approachability. It not only eliminates most boilerplate code for dealing with package information, but also provides an easy and simple API to retrieve them and associated data.
+
+# Changelog
+
+Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/nisrulz/packagehunter/releases).
+
+
+# Including in your project
 - PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency
 ```gradle
-compile 'com.github.nisrulz:packagehunter:1.0.0'
+compile 'com.github.nisrulz:packagehunter:1.1.0'
 ```
 
 #Usage
-+ Get a list of all package information by passing in the query text by calling `PackageHunter
-.getInstance().getListOfPackages()`
-```java
-ArrayList<PkgInfo> pkglist = PackageHunter.getInstance().getListOfPackages(getApplicationContext(), querytext);
-```
 
-*where*
+Checkout the [Wiki](https://github.com/nisrulz/packagehunter/wiki) for details
 
-|argument|type|
-|---|---|
-|getApplicationContext()|`Context`|
-|querytext|`String`|
+# Pull Requests
+I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:
+  1. Match coding style (braces, spacing, etc.) This is best achieved using `CMD`+`Option`+`L` (Reformat code) on Mac (not sure for Windows) with Android Studio defaults.
+  2. If its a feature, bugfix, or anything please only change code to what you specify.
+  3. Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)
+  4. Pull requests _must_ be made against `develop` branch. Any other branch (unless specified by the maintainers) will get rejected.
+  5. Check for existing [issues](https://github.com/nisrulz/packagehunter/issues) first, before filing an issue.  
+  6. Have fun!
 
-License
-=======
-
-    Copyright 2016 Nishant Srivastava
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+### Created & Maintained By
+[Nishant Srivastava](https://github.com/nisrulz) ([@nisrulz](https://www.twitter.com/nisrulz))

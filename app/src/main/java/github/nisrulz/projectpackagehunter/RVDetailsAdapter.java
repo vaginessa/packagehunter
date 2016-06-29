@@ -43,10 +43,4 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
     }
   }
 
-  public void updateWithNewListData(List<ElementInfo> newDataList) {
-    dataList.clear();
-    dataList = null;
-    dataList = newDataList;
-    notifyDataSetChanged();
-  }
 }

@@ -16,11 +16,6 @@
 
 package github.nisrulz.packagehunter;
 
-import android.content.pm.ActivityInfo;
-import android.content.pm.ConfigurationInfo;
-import android.content.pm.FeatureInfo;
-import android.content.pm.ProviderInfo;
-import android.content.pm.ServiceInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -32,24 +27,11 @@ public class PkgInfo implements Parcelable {
   private long firstInstallTime;
   private long lastUpdateTime;
 
-  private ActivityInfo[] activityInfos;
-  private ConfigurationInfo[] configurationInfos;
-  private FeatureInfo[] featureInfos;
-  private String[] requestedPermissions;
-  private ProviderInfo[] providerInfos;
-  private ActivityInfo[] receiversInfo;
-
   public PkgInfo() {
     versionName = "0.0";
     versionCode = 0;
     firstInstallTime = 0;
     lastUpdateTime = 0;
-    activityInfos = null;
-    configurationInfos = null;
-    featureInfos = null;
-    requestedPermissions = null;
-    providerInfos = null;
-    receiversInfo = null;
   }
 
   protected PkgInfo(Parcel in) {
@@ -59,13 +41,6 @@ public class PkgInfo implements Parcelable {
     versionCode = in.readInt();
     firstInstallTime = in.readLong();
     lastUpdateTime = in.readLong();
-    activityInfos = in.createTypedArray(ActivityInfo.CREATOR);
-    configurationInfos = in.createTypedArray(ConfigurationInfo.CREATOR);
-    featureInfos = in.createTypedArray(FeatureInfo.CREATOR);
-    requestedPermissions = in.createStringArray();
-    providerInfos = in.createTypedArray(ProviderInfo.CREATOR);
-    receiversInfo = in.createTypedArray(ActivityInfo.CREATOR);
-    serviceInfos = in.createTypedArray(ServiceInfo.CREATOR);
   }
 
   public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
@@ -77,38 +52,6 @@ public class PkgInfo implements Parcelable {
       return new PkgInfo[size];
     }
   };
-
-  public ActivityInfo[] getReceiversInfo() {
-    return receiversInfo;
-  }
-
-  public void setReceiversInfo(ActivityInfo[] receiversInfo) {
-    this.receiversInfo = receiversInfo;
-  }
-
-  public ActivityInfo[] getActivityInfos() {
-    return activityInfos;
-  }
-
-  public void setActivityInfos(ActivityInfo[] activityInfos) {
-    this.activityInfos = activityInfos;
-  }
-
-  public ConfigurationInfo[] getConfigurationInfos() {
-    return configurationInfos;
-  }
-
-  public void setConfigurationInfos(ConfigurationInfo[] configurationInfos) {
-    this.configurationInfos = configurationInfos;
-  }
-
-  public FeatureInfo[] getFeatureInfos() {
-    return featureInfos;
-  }
-
-  public void setFeatureInfos(FeatureInfo[] featureInfos) {
-    this.featureInfos = featureInfos;
-  }
 
   public long getFirstInstallTime() {
     return firstInstallTime;
@@ -125,32 +68,6 @@ public class PkgInfo implements Parcelable {
   public void setLastUpdateTime(long lastUpdateTime) {
     this.lastUpdateTime = lastUpdateTime;
   }
-
-  public ProviderInfo[] getProviderInfos() {
-    return providerInfos;
-  }
-
-  public void setProviderInfos(ProviderInfo[] providerInfos) {
-    this.providerInfos = providerInfos;
-  }
-
-  public String[] getRequestedPermissions() {
-    return requestedPermissions;
-  }
-
-  public void setRequestedPermissions(String[] requestedPermissions) {
-    this.requestedPermissions = requestedPermissions;
-  }
-
-  public ServiceInfo[] getServiceInfos() {
-    return serviceInfos;
-  }
-
-  public void setServiceInfos(ServiceInfo[] serviceInfos) {
-    this.serviceInfos = serviceInfos;
-  }
-
-  private ServiceInfo[] serviceInfos;
 
   public String getAppName() {
     return appName;
@@ -207,13 +124,6 @@ public class PkgInfo implements Parcelable {
     parcel.writeInt(versionCode);
     parcel.writeLong(firstInstallTime);
     parcel.writeLong(lastUpdateTime);
-    parcel.writeTypedArray(activityInfos, i);
-    parcel.writeTypedArray(configurationInfos, i);
-    parcel.writeTypedArray(featureInfos, i);
-    parcel.writeStringArray(requestedPermissions);
-    parcel.writeTypedArray(providerInfos, i);
-    parcel.writeTypedArray(receiversInfo, i);
-    parcel.writeTypedArray(serviceInfos, i);
   }
 }
 

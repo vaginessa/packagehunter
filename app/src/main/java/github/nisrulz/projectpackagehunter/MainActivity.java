@@ -34,7 +34,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-  private RecyclerView rv;
   private ArrayList<PkgInfo> pkgInfoArrayList;
   private RVMainAdapter adapter;
 
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     packageHunter = new PackageHunter(this);
 
-    rv = (RecyclerView) findViewById(R.id.rv_pkglist);
+    RecyclerView rv = (RecyclerView) findViewById(R.id.rv_pkglist);
     pkgInfoArrayList = packageHunter.getInstalledPackages();
 
     adapter = new RVMainAdapter(this, pkgInfoArrayList);
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
       @Override public boolean onQueryTextChange(String query) {
 
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PERMISSIONS);
+        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
         adapter.updateWithNewListData(pkgInfoArrayList);
 
         return false;

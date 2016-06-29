@@ -1,9 +1,9 @@
 package github.nisrulz.projectpackagehunter;
 
-public class ElementInfo {
+class ElementInfo {
 
-  String header;
-  String[] details;
+  private String header;
+  private String[] details;
 
   public ElementInfo(String header, String[] details) {
     this.details = details;

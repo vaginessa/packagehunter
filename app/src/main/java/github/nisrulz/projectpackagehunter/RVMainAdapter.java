@@ -15,7 +15,7 @@ import java.util.List;
 class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
   private List<PkgInfo> dataList;
-  private PackageHunter packageHunter;
+  private final PackageHunter packageHunter;
 
   public RVMainAdapter(Context context, List<PkgInfo> dataList) {
     packageHunter = new PackageHunter(context);

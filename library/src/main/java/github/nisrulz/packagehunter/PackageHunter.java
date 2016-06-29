@@ -186,12 +186,13 @@ public class PackageHunter {
 
   public String getAppNameForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    return packageInfo.applicationInfo.loadLabel(packageManager).toString();
+    return packageInfo != null ? packageInfo.applicationInfo.loadLabel(packageManager).toString()
+        : null;
   }
 
   public String getVersionForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    return packageInfo.versionName;
+    return packageInfo != null ? packageInfo.versionName : null;
   }
 
   public String getVersionCodeForPkg(String packageName) {
@@ -201,12 +202,12 @@ public class PackageHunter {
 
   public long getFirstInstallTimeForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    return packageInfo.firstInstallTime;
+    return packageInfo != null ? packageInfo.firstInstallTime : 0;
   }
 
   public long getLastUpdatedTimeForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    return packageInfo.lastUpdateTime;
+    return packageInfo != null ? packageInfo.lastUpdateTime : 0;
   }
 
   public Drawable getIconForPkg(String packageName) {
@@ -220,6 +221,7 @@ public class PackageHunter {
         icon =
             context.getResources().getDrawable(android.R.drawable.ic_menu_help, context.getTheme());
       } else {
+        //noinspection deprecation
         icon = context.getResources().getDrawable(android.R.drawable.ic_menu_help);
       }
     }
@@ -307,27 +309,6 @@ public class PackageHunter {
       newInfo.setVersionName(p.versionName);
       newInfo.setLastUpdateTime(p.lastUpdateTime);
       newInfo.setFirstInstallTime(p.firstInstallTime);
-      newInfo.setFeatureInfos(p.reqFeatures);
-
-      if (flag == PERMISSIONS) {
-        newInfo.setRequestedPermissions(p.requestedPermissions);
-      }
-
-      if (flag == SERVICES) {
-        newInfo.setServiceInfos(p.services);
-      }
-
-      if (flag == ACTIVITIES) {
-        newInfo.setActivityInfos(p.activities);
-      }
-
-      if (flag == PROVIDERS) {
-        newInfo.setProviderInfos(p.providers);
-      }
-
-      if (flag == RECEIVERS) {
-        newInfo.setReceiversInfo(p.receivers);
-      }
     }
 
     return newInfo;

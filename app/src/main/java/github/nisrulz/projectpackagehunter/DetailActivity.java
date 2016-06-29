@@ -14,17 +14,11 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
-  private RecyclerView rv;
-  private ArrayList<ElementInfo> elementInfoArrayList;
-  private RVDetailsAdapter adapter;
-
-  private Toolbar toolbar;
-
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_detail);
 
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     if (toolbar != null) {
       setSupportActionBar(toolbar);
     }
@@ -60,23 +54,23 @@ public class DetailActivity extends AppCompatActivity {
     txt_firsttime.setText("First Install Time : " + getFormattedUpTime(firstInstallTime));
     txt_lastupdated.setText("Last Update Time : " + getFormattedUpTime(lastUpdateTime));
 
-    getSupportActionBar().setTitle(appName);
+    if (getSupportActionBar() != null) getSupportActionBar().setTitle(appName);
 
-    rv = (RecyclerView) findViewById(R.id.rv_detaillist);
-    elementInfoArrayList = new ArrayList<>();
+    RecyclerView rv = (RecyclerView) findViewById(R.id.rv_detaillist);
+    ArrayList<ElementInfo> elementInfoArrayList = new ArrayList<>();
     elementInfoArrayList.add(new ElementInfo("Permissions", permissions));
     elementInfoArrayList.add(new ElementInfo("Services", services));
     elementInfoArrayList.add(new ElementInfo("Activities", activities));
     elementInfoArrayList.add(new ElementInfo("Providers", providers));
     elementInfoArrayList.add(new ElementInfo("Receivers", receivers));
 
-    adapter = new RVDetailsAdapter(elementInfoArrayList);
+    RVDetailsAdapter adapter = new RVDetailsAdapter(elementInfoArrayList);
     rv.setHasFixedSize(true);
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
   }
 
-  public String getFormattedUpTime(long millis) {
+  private String getFormattedUpTime(long millis) {
     int sec = (int) (millis / 1000) % 60;
     int min = (int) ((millis / (1000 * 60)) % 60);
     int hr = (int) ((millis / (1000 * 60 * 60)) % 24);

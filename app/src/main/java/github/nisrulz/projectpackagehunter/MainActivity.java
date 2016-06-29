@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
       @Override public boolean onQueryTextChange(String query) {
 
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
+        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PERMISSIONS);
         adapter.updateWithNewListData(pkgInfoArrayList);
 
         return false;

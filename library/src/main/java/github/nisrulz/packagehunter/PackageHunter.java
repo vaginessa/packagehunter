@@ -17,11 +17,8 @@
 package github.nisrulz.packagehunter;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ProviderInfo;
-import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -59,7 +56,7 @@ public class PackageHunter {
 
       switch (flag) {
         case APPLICATIONS:
-          String appname = pkgInfo.getPackageName();
+          String appname = pkgInfo.getAppName();
           if (appname != null && appname.toLowerCase().contains(query_lowercase)) {
             pkgInfoArrayList.add(pkgInfo);
           }
@@ -71,55 +68,60 @@ public class PackageHunter {
           }
           break;
         case PERMISSIONS: {
-          String[] permissions = pkgInfo.getRequestedPermissions();
+          String[] permissions = getPermissionForPkg(pkgInfo.getPackageName());
           if (permissions != null) {
             for (int j = 0; j < permissions.length; j++) {
-              if (permissions[i].toLowerCase().contains(query_lowercase)) {
+              if (permissions[j].toLowerCase().contains(query_lowercase)) {
                 pkgInfoArrayList.add(pkgInfo);
+                break;
               }
             }
           }
           break;
         }
         case SERVICES: {
-          ServiceInfo[] services = pkgInfo.getServiceInfos();
+          String[] services = getServicesForPkg(pkgInfo.getPackageName());
           if (services != null) {
             for (int j = 0; j < services.length; j++) {
-              if (services[i].name.toLowerCase().contains(query_lowercase)) {
+              if (services[j].toLowerCase().contains(query_lowercase)) {
                 pkgInfoArrayList.add(pkgInfo);
+                break;
               }
             }
           }
           break;
         }
         case RECEIVERS: {
-          ActivityInfo[] recievers = pkgInfo.getReceiversInfo();
+          String[] recievers = getReceiverForPkg(pkgInfo.getPackageName());
           if (recievers != null) {
             for (int j = 0; j < recievers.length; j++) {
-              if (recievers[i].name.toLowerCase().contains(query_lowercase)) {
+              if (recievers[j].toLowerCase().contains(query_lowercase)) {
                 pkgInfoArrayList.add(pkgInfo);
+                break;
               }
             }
           }
           break;
         }
         case ACTIVITIES: {
-          ActivityInfo[] activities = pkgInfo.getActivityInfos();
+          String[] activities = getActivitiesForPkg(pkgInfo.getPackageName());
           if (activities != null) {
             for (int j = 0; j < activities.length; j++) {
-              if (activities[i].name.toLowerCase().contains(query_lowercase)) {
+              if (activities[j].toLowerCase().contains(query_lowercase)) {
                 pkgInfoArrayList.add(pkgInfo);
+                break;
               }
             }
           }
           break;
         }
         case PROVIDERS: {
-          ProviderInfo[] providers = pkgInfo.getProviderInfos();
+          String[] providers = getProvidersForPkg(pkgInfo.getPackageName());
           if (providers != null) {
             for (int j = 0; j < providers.length; j++) {
-              if (providers[i].name.toLowerCase().contains(query_lowercase)) {
+              if (providers[j].toLowerCase().contains(query_lowercase)) {
                 pkgInfoArrayList.add(pkgInfo);
+                break;
               }
             }
           }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import github.nisrulz.packagehunter.PackageHunter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -41,14 +42,11 @@ public class DetailActivity extends AppCompatActivity {
     String[] permissions = packageHunter.getPermissionForPkg(packageName);
     String[] activities = packageHunter.getActivitiesForPkg(packageName);
     String[] services = packageHunter.getServicesForPkg(packageName);
-    String[] configurations = packageHunter.getConfigurationsForPkg(packageName);
     String[] providers = packageHunter.getProvidersForPkg(packageName);
     String[] receivers = packageHunter.getReceiverForPkg(packageName);
-    String[] features = packageHunter.getFeaturesForPkg(packageName);
 
     TextView txt_version = (TextView) findViewById(R.id.txtvw_vname);
     TextView txt_versioncode = (TextView) findViewById(R.id.txtvw_vc);
-    TextView txt_appname = (TextView) findViewById(R.id.txtvw_appname);
     TextView txt_pkg = (TextView) findViewById(R.id.txtvw_pkgname);
     ImageView img_icon = (ImageView) findViewById(R.id.imgvw_icn);
 
@@ -59,8 +57,8 @@ public class DetailActivity extends AppCompatActivity {
     txt_version.setText("Version : " + version);
     txt_versioncode.setText("Version Code : " + versionCode);
     txt_pkg.setText(packageName);
-    txt_firsttime.setText(String.valueOf(firstInstallTime));
-    txt_lastupdated.setText(String.valueOf(lastUpdateTime));
+    txt_firsttime.setText("First Install Time : " + getFormattedUpTime(firstInstallTime));
+    txt_lastupdated.setText("Last Update Time : " + getFormattedUpTime(lastUpdateTime));
 
     getSupportActionBar().setTitle(appName);
 
@@ -69,14 +67,20 @@ public class DetailActivity extends AppCompatActivity {
     elementInfoArrayList.add(new ElementInfo("Permissions", permissions));
     elementInfoArrayList.add(new ElementInfo("Services", services));
     elementInfoArrayList.add(new ElementInfo("Activities", activities));
-    elementInfoArrayList.add(new ElementInfo("Configurations", configurations));
     elementInfoArrayList.add(new ElementInfo("Providers", providers));
     elementInfoArrayList.add(new ElementInfo("Receivers", receivers));
-    elementInfoArrayList.add(new ElementInfo("Features", features));
 
     adapter = new RVDetailsAdapter(elementInfoArrayList);
     rv.setHasFixedSize(true);
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
+  }
+
+  public String getFormattedUpTime(long millis) {
+    int sec = (int) (millis / 1000) % 60;
+    int min = (int) ((millis / (1000 * 60)) % 60);
+    int hr = (int) ((millis / (1000 * 60 * 60)) % 24);
+
+    return String.format(Locale.US, "%02d:%02d:%02d", hr, min, sec);
   }
 }

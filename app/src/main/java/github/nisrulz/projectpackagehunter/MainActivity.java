@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override public boolean onQueryTextSubmit(String query) {
         searchViewAndroidActionBar.clearFocus();
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PERMISSIONS);
+        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
         adapter.updateWithNewListData(pkgInfoArrayList);
         return true;
       }

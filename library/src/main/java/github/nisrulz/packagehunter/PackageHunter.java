@@ -17,8 +17,11 @@
 package github.nisrulz.packagehunter;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +38,7 @@ public class PackageHunter {
   public static final int SERVICES = 3;
   public static final int RECEIVERS = 4;
   public static final int ACTIVITIES = 5;
-  public static final int CONFIGURATION = 6;
-  public static final int PROVIDERS = 7;
+  public static final int PROVIDERS = 6;
 
   public PackageHunter(Context context) {
     packageManager = context.getPackageManager();
@@ -52,60 +54,79 @@ public class PackageHunter {
 
       switch (flag) {
         case APPLICATIONS:
+          String appname = pkgInfo.getPackageName();
+          if (appname != null && appname.toLowerCase().contains(query_lowercase)) {
+            pkgInfoArrayList.add(pkgInfo);
+          }
           break;
         case PACKAGES:
-          if (pkgInfo.getPackageName().toLowerCase().contains(query_lowercase)) {
+          String packagename = pkgInfo.getPackageName();
+          if (packagename != null && packagename.toLowerCase().contains(query_lowercase)) {
             pkgInfoArrayList.add(pkgInfo);
           }
           break;
         case PERMISSIONS: {
-          for (int j = 0; j < pkgInfo.getRequestedPermissions().length; j++) {
-            if (pkgInfo.getRequestedPermissions()[i].toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
+          String[] permissions = pkgInfo.getRequestedPermissions();
+          if (permissions != null) {
+            for (int j = 0; j < permissions.length; j++) {
+              if (permissions[i].toLowerCase().contains(query_lowercase)) {
+                pkgInfoArrayList.add(pkgInfo);
+              }
             }
           }
           break;
         }
-        case SERVICES:
-          for (int j = 0; j < pkgInfo.getServiceInfos().length; j++) {
-            if (pkgInfo.getServiceInfos()[i].name.toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
+        case SERVICES: {
+          ServiceInfo[] services = pkgInfo.getServiceInfos();
+          if (services != null) {
+            for (int j = 0; j < services.length; j++) {
+              if (services[i].name.toLowerCase().contains(query_lowercase)) {
+                pkgInfoArrayList.add(pkgInfo);
+              }
             }
           }
           break;
-        case RECEIVERS:
-          for (int j = 0; j < pkgInfo.getReceiversInfo().length; j++) {
-            if (pkgInfo.getReceiversInfo()[i].name.toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
+        }
+        case RECEIVERS: {
+          ActivityInfo[] recievers = pkgInfo.getReceiversInfo();
+          if (recievers != null) {
+            for (int j = 0; j < recievers.length; j++) {
+              if (recievers[i].name.toLowerCase().contains(query_lowercase)) {
+                pkgInfoArrayList.add(pkgInfo);
+              }
             }
           }
           break;
-        case ACTIVITIES:
-          for (int j = 0; j < pkgInfo.getActivityInfos().length; j++) {
-            if (pkgInfo.getActivityInfos()[i].name.toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
+        }
+        case ACTIVITIES: {
+          ActivityInfo[] activities = pkgInfo.getActivityInfos();
+          if (activities != null) {
+            for (int j = 0; j < activities.length; j++) {
+              if (activities[i].name.toLowerCase().contains(query_lowercase)) {
+                pkgInfoArrayList.add(pkgInfo);
+              }
             }
           }
           break;
-        case CONFIGURATION:
-          for (int j = 0; j < pkgInfo.getActivityInfos().length; j++) {
-            if (pkgInfo.getActivityInfos()[i].name.toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
+        }
+        case PROVIDERS: {
+          ProviderInfo[] providers = pkgInfo.getProviderInfos();
+          if (providers != null) {
+            for (int j = 0; j < providers.length; j++) {
+              if (providers[i].name.toLowerCase().contains(query_lowercase)) {
+                pkgInfoArrayList.add(pkgInfo);
+              }
             }
           }
           break;
-        case PROVIDERS:
-          for (int j = 0; j < pkgInfo.getProviderInfos().length; j++) {
-            if (pkgInfo.getProviderInfos()[i].name.toLowerCase().contains(query_lowercase)) {
-              pkgInfoArrayList.add(pkgInfo);
-            }
-          }
-          break;
-        default:
-          if (pkgInfo.getPackageName().toLowerCase().contains(query_lowercase)) {
+        }
+        default: {
+          String packagename1 = pkgInfo.getPackageName();
+          if (packagename1 != null && packagename1.toLowerCase().contains(query_lowercase)) {
             pkgInfoArrayList.add(pkgInfo);
           }
           break;
+        }
       }
     }
 
@@ -137,10 +158,6 @@ public class PackageHunter {
       case ACTIVITIES:
         installed_packages_list =
             packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
-        break;
-      case CONFIGURATION:
-        installed_packages_list =
-            packageManager.getInstalledPackages(PackageManager.GET_CONFIGURATIONS);
         break;
       case PROVIDERS:
         installed_packages_list = packageManager.getInstalledPackages(PackageManager.GET_PROVIDERS);
@@ -188,19 +205,6 @@ public class PackageHunter {
   public Drawable getIconForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, 0);
     return packageInfo.applicationInfo.loadIcon(packageManager);
-  }
-
-  public String[] getFeaturesForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    if (packageInfo.reqFeatures != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.reqFeatures.length);
-      for (int i = 0; i < packageInfo.reqFeatures.length; i++) {
-        data.add(packageInfo.reqFeatures[i].name);
-      }
-      return data.toArray(new String[data.size()]);
-    } else {
-      return null;
-    }
   }
 
   public String[] getPermissionForPkg(String packageName) {
@@ -264,19 +268,6 @@ public class PackageHunter {
     }
   }
 
-  public String[] getConfigurationsForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_CONFIGURATIONS);
-    if (packageInfo.configPreferences != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.configPreferences.length);
-      for (int i = 0; i < packageInfo.configPreferences.length; i++) {
-        data.add(packageInfo.configPreferences[i].toString());
-      }
-      return data.toArray(new String[data.size()]);
-    } else {
-      return null;
-    }
-  }
-
   private PackageInfo getPkgInfo(String packageName, int flag) {
     try {
       return packageManager.getPackageInfo(packageName, flag);
@@ -313,10 +304,6 @@ public class PackageHunter {
 
       if (flag == PROVIDERS) {
         newInfo.setProviderInfos(p.providers);
-      }
-
-      if (flag == CONFIGURATION) {
-        newInfo.setConfigurationInfos(p.configPreferences);
       }
 
       if (flag == RECEIVERS) {

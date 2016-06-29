@@ -21,7 +21,6 @@ import android.content.pm.ConfigurationInfo;
 import android.content.pm.FeatureInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -32,7 +31,6 @@ public class PkgInfo implements Parcelable {
   private int versionCode = 0;
   private long firstInstallTime;
   private long lastUpdateTime;
-  private Drawable icon;
 
   private ActivityInfo[] activityInfos;
   private ConfigurationInfo[] configurationInfos;
@@ -168,14 +166,6 @@ public class PkgInfo implements Parcelable {
 
   public void setPackageName(String packageName) {
     this.packageName = packageName;
-  }
-
-  public Drawable getIcon() {
-    return icon;
-  }
-
-  public void setIcon(Drawable icon) {
-    this.icon = icon;
   }
 
   public int getVersionCode() {

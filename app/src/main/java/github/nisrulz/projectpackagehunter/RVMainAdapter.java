@@ -1,25 +1,31 @@
 package github.nisrulz.projectpackagehunter;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import github.nisrulz.packagehunter.PackageHunter;
 import github.nisrulz.packagehunter.PkgInfo;
 import java.util.List;
 
 class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
   private List<PkgInfo> dataList;
+  private PackageHunter packageHunter;
 
-  public RVMainAdapter(List<PkgInfo> dataList) {
+  public RVMainAdapter(Context context, List<PkgInfo> dataList) {
+    packageHunter = new PackageHunter(context);
     this.dataList = dataList;
   }
 
   @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
+    View view =
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
 
     return new ItemViewHolder(view);
   }
@@ -27,7 +33,9 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
   @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
     holder.txt_appname.setText(dataList.get(position).getAppName());
     holder.txt_pkgname.setText(dataList.get(position).getPackageName());
-    holder.icon.setImageDrawable(dataList.get(position).getIcon());
+
+    Drawable icon = packageHunter.getIconForPkg(dataList.get(position).getPackageName());
+    holder.icon.setImageDrawable(icon);
   }
 
   @Override public int getItemCount() {

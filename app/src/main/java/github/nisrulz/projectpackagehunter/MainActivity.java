@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     rv = (RecyclerView) findViewById(R.id.rv_pkglist);
     pkgInfoArrayList = packageHunter.getInstalledPackages();
 
-    adapter = new RVMainAdapter(pkgInfoArrayList);
+    adapter = new RVMainAdapter(this, pkgInfoArrayList);
     rv.hasFixedSize();
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);
@@ -76,15 +76,29 @@ public class MainActivity extends AppCompatActivity {
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override public boolean onQueryTextSubmit(String query) {
         searchViewAndroidActionBar.clearFocus();
-        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
-        adapter.updateWithNewListData(pkgInfoArrayList);
         return true;
       }
 
       @Override public boolean onQueryTextChange(String query) {
+
+        pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
+        adapter.updateWithNewListData(pkgInfoArrayList);
+
         return false;
       }
     });
     return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_refresh: {
+        pkgInfoArrayList = packageHunter.getInstalledPackages();
+        adapter.updateWithNewListData(pkgInfoArrayList);
+        break;
+      }
+    }
+
+    return super.onOptionsItemSelected(item);
   }
 }

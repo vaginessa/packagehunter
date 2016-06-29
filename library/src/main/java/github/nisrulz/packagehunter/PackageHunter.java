@@ -23,6 +23,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class PackageHunter {
 
   private static final String TAG = "PackageHunter";
   private final PackageManager packageManager;
+
+  private final Context context;
 
   // Flags
   public static final int APPLICATIONS = 0;
@@ -42,6 +46,7 @@ public class PackageHunter {
 
   public PackageHunter(Context context) {
     packageManager = context.getPackageManager();
+    this.context = context;
   }
 
   public ArrayList<PkgInfo> searchInList(String query, int flag) {
@@ -203,8 +208,21 @@ public class PackageHunter {
   }
 
   public Drawable getIconForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, 0);
-    return packageInfo.applicationInfo.loadIcon(packageManager);
+    Drawable icon;
+    try {
+      icon = packageManager.getApplicationIcon(packageName);
+    } catch (PackageManager.NameNotFoundException ex) {
+      Log.e(TAG, "Error", ex);
+
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        icon =
+            context.getResources().getDrawable(android.R.drawable.ic_menu_help, context.getTheme());
+      } else {
+        icon = context.getResources().getDrawable(android.R.drawable.ic_menu_help);
+      }
+    }
+
+    return icon;
   }
 
   public String[] getPermissionForPkg(String packageName) {
@@ -285,7 +303,6 @@ public class PackageHunter {
       newInfo.setPackageName(p.packageName);
       newInfo.setVersionCode(p.versionCode);
       newInfo.setVersionName(p.versionName);
-      newInfo.setIcon(p.applicationInfo.loadIcon(packageManager));
       newInfo.setLastUpdateTime(p.lastUpdateTime);
       newInfo.setFirstInstallTime(p.firstInstallTime);
       newInfo.setFeatureInfos(p.reqFeatures);

@@ -1,31 +1,42 @@
 package github.nisrulz.projectpackagehunter;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import github.nisrulz.packagehunter.PackageHunter;
+import java.util.ArrayList;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends AppCompatActivity {
+
+  private RecyclerView rv;
+  private ArrayList<ElementInfo> elementInfoArrayList;
+  private RVDetailsAdapter adapter;
+
+  private Toolbar toolbar;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_detail);
 
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    if (toolbar != null) {
+      setSupportActionBar(toolbar);
+    }
+
     String packageName = getIntent().getStringExtra("data");
     PackageHunter packageHunter = new PackageHunter(this);
 
-    TextView txt_pkginfo_version = (TextView) findViewById(R.id.pkginfo_vname);
-    TextView txt_pkginfo_versioncode = (TextView) findViewById(R.id.pkginfo_vc);
-    TextView txt_pkginfo_appname = (TextView) findViewById(R.id.pkginfo_name);
-    TextView txt_pkginfo_pkg = (TextView) findViewById(R.id.pkginfo_pkg);
-    ImageView img_pkginfo_icon = (ImageView) findViewById(R.id.pkginfo_icn);
-
-    TextView txt_permissions = (TextView) findViewById(R.id.txt_permissions);
-    TextView txt_services = (TextView) findViewById(R.id.txt_services);
-    TextView txt_features = (TextView) findViewById(R.id.txt_features);
+    String version = packageHunter.getVersionForPkg(packageName);
+    String versionCode = packageHunter.getVersionCodeForPkg(packageName);
+    String appName = packageHunter.getAppNameForPkg(packageName);
+    long firstInstallTime = packageHunter.getFirstInstallTimeForPkg(packageName);
+    long lastUpdateTime = packageHunter.getLastUpdatedTimeForPkg(packageName);
+    Drawable icon = packageHunter.getIconForPkg(packageName);
 
     String[] permissions = packageHunter.getPermissionForPkg(packageName);
     String[] activities = packageHunter.getActivitiesForPkg(packageName);
@@ -35,43 +46,37 @@ public class DetailActivity extends Activity {
     String[] receivers = packageHunter.getReceiverForPkg(packageName);
     String[] features = packageHunter.getFeaturesForPkg(packageName);
 
-    String version = packageHunter.getVersionForPkg(packageName);
-    String versionCode = packageHunter.getVersionCodeForPkg(packageName);
-    String appName = packageHunter.getAppNameForPkg(packageName);
-    long firstInstallTime = packageHunter.getFirstInstallTimeForPkg(packageName);
-    long lastUpdateTime = packageHunter.getLastUpdatedTimeForPkg(packageName);
-    Drawable icon = packageHunter.getIconForPkg(packageName);
+    TextView txt_version = (TextView) findViewById(R.id.txtvw_vname);
+    TextView txt_versioncode = (TextView) findViewById(R.id.txtvw_vc);
+    TextView txt_appname = (TextView) findViewById(R.id.txtvw_appname);
+    TextView txt_pkg = (TextView) findViewById(R.id.txtvw_pkgname);
+    ImageView img_icon = (ImageView) findViewById(R.id.imgvw_icn);
 
-    img_pkginfo_icon.setImageDrawable(icon);
-    txt_pkginfo_version.setText(version);
-    txt_pkginfo_versioncode.setText(versionCode);
-    txt_pkginfo_appname.setText(appName);
-    txt_pkginfo_pkg.setText(packageName);
+    TextView txt_firsttime = (TextView) findViewById(R.id.txtvw_firsttime);
+    TextView txt_lastupdated = (TextView) findViewById(R.id.txtvw_lastupdated);
 
-    if (permissions != null) {
-      txt_permissions.setText(getStringFromArray(permissions));
-    } else {
-      txt_permissions.setVisibility(View.GONE);
-    }
+    img_icon.setImageDrawable(icon);
+    txt_version.setText("Version : " + version);
+    txt_versioncode.setText("Version Code : " + versionCode);
+    txt_pkg.setText(packageName);
+    txt_firsttime.setText(String.valueOf(firstInstallTime));
+    txt_lastupdated.setText(String.valueOf(lastUpdateTime));
 
-    if (services != null) {
-      txt_services.setText(getStringFromArray(services));
-    } else {
-      txt_services.setVisibility(View.GONE);
-    }
+    getSupportActionBar().setTitle(appName);
 
-    if (features != null) {
-      txt_features.setText(getStringFromArray(features));
-    } else {
-      txt_features.setVisibility(View.GONE);
-    }
-  }
+    rv = (RecyclerView) findViewById(R.id.rv_detaillist);
+    elementInfoArrayList = new ArrayList<>();
+    elementInfoArrayList.add(new ElementInfo("Permissions", permissions));
+    elementInfoArrayList.add(new ElementInfo("Services", services));
+    elementInfoArrayList.add(new ElementInfo("Activities", activities));
+    elementInfoArrayList.add(new ElementInfo("Configurations", configurations));
+    elementInfoArrayList.add(new ElementInfo("Providers", providers));
+    elementInfoArrayList.add(new ElementInfo("Receivers", receivers));
+    elementInfoArrayList.add(new ElementInfo("Features", features));
 
-  private String getStringFromArray(String[] stringArray) {
-    StringBuilder stringBuilder = new StringBuilder();
-    for (int i = 0; i < stringArray.length; i++) {
-      stringBuilder.append(stringArray[i]).append("\n");
-    }
-    return stringBuilder.toString();
+    adapter = new RVDetailsAdapter(elementInfoArrayList);
+    rv.setHasFixedSize(true);
+    rv.setLayoutManager(new LinearLayoutManager(this));
+    rv.setAdapter(adapter);
   }
 }

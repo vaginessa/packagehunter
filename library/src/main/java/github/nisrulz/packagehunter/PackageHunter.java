@@ -205,7 +205,7 @@ public class PackageHunter {
 
   public String[] getPermissionForPkg(String packageName) {
     PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PERMISSIONS);
-    if (packageInfo.permissions != null) {
+    if (packageInfo.requestedPermissions != null) {
       return packageInfo.requestedPermissions;
     } else {
       return null;

@@ -9,17 +9,17 @@ import android.widget.TextView;
 import github.nisrulz.packagehunter.PkgInfo;
 import java.util.List;
 
-class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
+class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
   private List<PkgInfo> dataList;
 
-  public RVAdapter(List<PkgInfo> dataList) {
+  public RVMainAdapter(List<PkgInfo> dataList) {
     this.dataList = dataList;
   }
 
   @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_item, parent, false);
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
 
     return new ItemViewHolder(view);
   }
@@ -27,8 +27,6 @@ class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
   @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
     holder.txt_appname.setText(dataList.get(position).getAppName());
     holder.txt_pkgname.setText(dataList.get(position).getPackageName());
-    holder.txt_versioncode.setText(String.valueOf(dataList.get(position).getVersionCode()));
-    holder.txt_version.setText(dataList.get(position).getVersionName());
     holder.icon.setImageDrawable(dataList.get(position).getIcon());
   }
 
@@ -39,17 +37,13 @@ class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
   public class ItemViewHolder extends RecyclerView.ViewHolder {
     final TextView txt_appname;
     final TextView txt_pkgname;
-    final TextView txt_versioncode;
-    final TextView txt_version;
     final ImageView icon;
 
     public ItemViewHolder(View itemView) {
       super(itemView);
-      txt_appname = (TextView) itemView.findViewById(R.id.pkginfo_name);
-      txt_pkgname = (TextView) itemView.findViewById(R.id.pkginfo_pkg);
-      txt_version = (TextView) itemView.findViewById(R.id.pkginfo_vname);
-      txt_versioncode = (TextView) itemView.findViewById(R.id.pkginfo_vc);
-      icon = (ImageView) itemView.findViewById(R.id.pkginfo_icn);
+      txt_appname = (TextView) itemView.findViewById(R.id.txtvw_appname);
+      txt_pkgname = (TextView) itemView.findViewById(R.id.txtvw_pkgname);
+      icon = (ImageView) itemView.findViewById(R.id.imgvw_icn);
     }
   }
 

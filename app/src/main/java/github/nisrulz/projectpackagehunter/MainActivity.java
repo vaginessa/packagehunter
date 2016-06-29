@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
   private RecyclerView rv;
   private ArrayList<PkgInfo> pkgInfoArrayList;
-  private RVAdapter adapter;
+  private RVMainAdapter adapter;
 
   private PackageHunter packageHunter;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     rv = (RecyclerView) findViewById(R.id.rv_pkglist);
     pkgInfoArrayList = packageHunter.getInstalledPackages();
 
-    adapter = new RVAdapter(pkgInfoArrayList);
+    adapter = new RVMainAdapter(pkgInfoArrayList);
     rv.hasFixedSize();
     rv.setLayoutManager(new LinearLayoutManager(this));
     rv.setAdapter(adapter);

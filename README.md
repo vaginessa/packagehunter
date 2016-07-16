@@ -23,6 +23,12 @@ The library is built for simplicity and approachability. It not only eliminates 
 
 Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/nisrulz/packagehunter/releases).
 
+# Get information for 
+
++[Specific Package](https://github.com/nisrulz/packagehunter/wiki/Usage#specific-package)
++[All Packages in Device](https://github.com/nisrulz/packagehunter/wiki/Usage#all-packages-in-device)
++[Search for a Package](https://github.com/nisrulz/packagehunter/wiki/Usage#search-for-a-package)
+
 
 # Including in your project
 - PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency
@@ -30,9 +36,18 @@ Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/ni
 compile 'com.github.nisrulz:packagehunter:1.1.0'
 ```
 
-#Usage
+# Simple example
 
-Checkout the [Wiki](https://github.com/nisrulz/packagehunter/wiki) for details
+Create an instance of `PackageHunter`
+```java
+PackageHunter packageHunter = new PackageHunter(context);
+```
+Next call an available function on the ***packageHunter*** instance such as
+```java
+String appName= packageHunter.getAppNameForPkg(packageName);
+```
+
+### <center> :page_with_curl: For more info , check the **[Wiki Docs](https://github.com/nisrulz/packagehunter/wiki/Usage)** </center>
 
 # Pull Requests
 I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:

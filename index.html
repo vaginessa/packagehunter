@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Packagehunter by nisrulz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Packagehunter</h1>
+        <p>Hunt down all package information</p>
+        <p class="view"><a href="https://github.com/nisrulz/packagehunter">View the Project on GitHub <small>nisrulz/packagehunter</small></a></p>
+        <ul>
+          <li><a href="https://github.com/nisrulz/packagehunter/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nisrulz/packagehunter/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nisrulz/packagehunter">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a id="specs" class="anchor" href="#specs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specs</h3>
+
+<p><a href="https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter"><img src="https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg" alt="Maven Central"></a></p>
+
+<h3>
+<a id="featured-in" class="anchor" href="#featured-in" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Featured in</h3>
+
+<p><a href="https://android-arsenal.com/details/1/3815"><img src="https://img.shields.io/badge/Android%20Arsenal-PackageHunter-green.svg?style=true" alt="Android Arsenal"></a> <a href="https://www.androiddevdigest.com/digest-101/"><img src="https://img.shields.io/badge/AndroidDev%20Digest-%23101-blue.svg" alt="AndroidDev Digest"></a></p>
+
+<h3>
+<a id="show-some-heart" class="anchor" href="#show-some-heart" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Show some <g-emoji alias="heart" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2764.png">❤️</g-emoji>
+</h3>
+
+<p><a href="https://github.com/nisrulz/packagehunter"><img src="https://img.shields.io/github/stars/nisrulz/packagehunter.svg?style=social&amp;label=Star" alt="GitHub stars"></a> <a href="https://github.com/nisrulz/packagehunter/fork"><img src="https://img.shields.io/github/forks/nisrulz/packagehunter.svg?style=social&amp;label=Fork" alt="GitHub forks"></a> <a href="https://github.com/nisrulz/packagehunter"><img src="https://img.shields.io/github/watchers/nisrulz/packagehunter.svg?style=social&amp;label=Watch" alt="GitHub watchers"></a> <a href="https://github.com/nisrulz"><img src="https://img.shields.io/github/followers/nisrulz.svg?style=social&amp;label=Follow" alt="GitHub followers"></a><br>
+<a href="https://twitter.com/nisrulz"><img src="https://img.shields.io/twitter/follow/nisrulz.svg?style=social" alt="Twitter Follow"></a> </p>
+
+<p>Android library to hunt down package information.</p>
+
+<p>The library is built for simplicity and approachability. It not only eliminates most boilerplate code for dealing with package information, but also provides an easy and simple API to retrieve them and associated data.</p>
+
+<h1>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changelog</h1>
+
+<p>Starting with <code>1.1.0</code>, Changes exist in the <a href="https://github.com/nisrulz/packagehunter/releases">releases tab</a>.</p>
+
+<h1>
+<a id="including-in-your-project" class="anchor" href="#including-in-your-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Including in your project</h1>
+
+<ul>
+<li>PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency</li>
+</ul>
+
+<div class="highlight highlight-source-groovy-gradle"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>com.github.nisrulz:packagehunter:1.1.0<span class="pl-pds">'</span></span></pre></div>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>Create an instance of <code>PackageHunter</code></p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">PackageHunter</span> packageHunter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">PackageHunter</span>(context);</pre></div>
+
+<p>Next call an available function on the <strong><em>packageHunter</em></strong> instance such as</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">String</span> appName<span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>getAppNameForPkg(packageName);</pre></div>
+
+<h2>
+<a id="to-get-information-from" class="anchor" href="#to-get-information-from" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To get information from</h2>
+
+<h3>
+<a id="specific-package" class="anchor" href="#specific-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specific Package</h3>
+
+<p>To get information for a specific <code>packageName</code> , you have the following methods available to you</p>
+
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>functionName</th>
+<th>returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application Name</td>
+<td><code>getAppNameForPkg(packageName)</code></td>
+<td>String</td>
+</tr>
+<tr>
+<td>Version</td>
+<td><code>getVersionForPkg(packageName)</code></td>
+<td>String</td>
+</tr>
+<tr>
+<td>Version Code</td>
+<td><code>getVersionCodeForPkg(packageName)</code></td>
+<td>String</td>
+</tr>
+<tr>
+<td>First install time(ms)</td>
+<td><code>getFirstInstallTimeForPkg(packageName)</code></td>
+<td>long</td>
+</tr>
+<tr>
+<td>Last update time(ms)</td>
+<td><code>getLastUpdatedTimeForPkg(packageName)</code></td>
+<td>long</td>
+</tr>
+<tr>
+<td>Icon</td>
+<td><code>getIconForPkg(packageName)</code></td>
+<td>Drawable</td>
+</tr>
+<tr>
+<td>All Permissions</td>
+<td><code>getPermissionForPkg(packageName)</code></td>
+<td>String[]</td>
+</tr>
+<tr>
+<td>All Services</td>
+<td><code>getServicesForPkg(packageName)</code></td>
+<td>String[]</td>
+</tr>
+<tr>
+<td>All Providers</td>
+<td><code>getProvidersForPkg(packageName)</code></td>
+<td>String[]</td>
+</tr>
+<tr>
+<td>All Receivers</td>
+<td><code>getReceiverForPkg(packageName)</code></td>
+<td>String[]</td>
+</tr>
+<tr>
+<td>All Activities</td>
+<td><code>getActivitiesForPkg(packageName)</code></td>
+<td>String[]</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="all-packages-in-device" class="anchor" href="#all-packages-in-device" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>All Packages in Device</h3>
+
+<p>If you want to get the info about whole list of installed applications</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">ArrayList&lt;<span class="pl-smi">PkgInfo</span>&gt;</span> pkgInfoArrayList <span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>getInstalledPackages()</pre></div>
+
+<p>which will provide you a list of <code>PkgInfo</code> objects each having</p>
+
+<ol>
+<li>Application Name</li>
+<li>Package Name</li>
+<li>Version</li>
+<li>Version Code</li>
+<li>First install time</li>
+<li>Last install time</li>
+</ol>
+
+<h3>
+<a id="search-for-a-package" class="anchor" href="#search-for-a-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Search for a Package</h3>
+
+<p>If you would instead like to search for a package which has a certain feature in all installed packages, you would have to call the below function with a flag.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">ArrayList&lt;<span class="pl-smi">PkgInfo</span>&gt;</span> pkgInfoArrayList <span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>searchInList(query, flag);</pre></div>
+
+<p>where flag can be </p>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Search in feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PackageHunter.APPLICATIONS</code></td>
+<td>Application Name</td>
+</tr>
+<tr>
+<td><code>PackageHunter.PACKAGES</code></td>
+<td>Package Name</td>
+</tr>
+<tr>
+<td><code>PackageHunter.PERMISSIONS</code></td>
+<td>Permissions</td>
+</tr>
+<tr>
+<td><code>PackageHunter.SERVICES</code></td>
+<td>Services</td>
+</tr>
+<tr>
+<td><code>PackageHunter.RECEIVERS</code></td>
+<td>Receivers</td>
+</tr>
+<tr>
+<td><code>PackageHunter.ACTIVITIES</code></td>
+<td>Activities</td>
+</tr>
+<tr>
+<td><code>PackageHunter.PROVIDERS</code></td>
+<td>Providers</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Checkout the sample app for demo.</p>
+</blockquote>
+
+<h1>
+<a id="pull-requests" class="anchor" href="#pull-requests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pull Requests</h1>
+
+<p>I welcome and encourage all pull requests. It usually will take me within 24-48 hours to respond to any issue or request. Here are some basic rules to follow to ensure timely addition of your request:</p>
+
+<ol>
+<li>Match coding style (braces, spacing, etc.) This is best achieved using <code>CMD</code>+<code>Option</code>+<code>L</code> (Reformat code) on Mac (not sure for Windows) with Android Studio defaults.</li>
+<li>If its a feature, bugfix, or anything please only change code to what you specify.</li>
+<li>Please keep PR titles easy to read and descriptive of changes, this will make them easier to merge :)</li>
+<li>Pull requests <em>must</em> be made against <code>develop</code> branch. Any other branch (unless specified by the maintainers) will get rejected.</li>
+<li>Check for existing <a href="https://github.com/nisrulz/packagehunter/issues">issues</a> first, before filing an issue.<br>
+</li>
+<li>Have fun!</li>
+</ol>
+
+<h3>
+<a id="created--maintained-by" class="anchor" href="#created--maintained-by" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Created &amp; Maintained By</h3>
+
+<p><a href="https://github.com/nisrulz">Nishant Srivastava</a> (<a href="https://www.twitter.com/nisrulz">@nisrulz</a>)</p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<pre><code>Copyright 2016 Nishant Srivastava
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/nisrulz">nisrulz</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>

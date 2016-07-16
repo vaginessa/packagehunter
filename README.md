@@ -23,13 +23,6 @@ The library is built for simplicity and approachability. It not only eliminates 
 
 Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/nisrulz/packagehunter/releases).
 
-# Get information for 
-
-+[Specific Package](https://github.com/nisrulz/packagehunter/wiki/Usage#specific-package)
-+[All Packages in Device](https://github.com/nisrulz/packagehunter/wiki/Usage#all-packages-in-device)
-+[Search for a Package](https://github.com/nisrulz/packagehunter/wiki/Usage#search-for-a-package)
-
-
 # Including in your project
 - PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency
 ```gradle
@@ -46,6 +39,12 @@ Next call an available function on the ***packageHunter*** instance such as
 ```java
 String appName= packageHunter.getAppNameForPkg(packageName);
 ```
+
+### Get information for
+
++ [Specific Package](https://github.com/nisrulz/packagehunter/wiki/Usage#specific-package)
++ [All Packages in Device](https://github.com/nisrulz/packagehunter/wiki/Usage#all-packages-in-device)
++ [Search for a Package](https://github.com/nisrulz/packagehunter/wiki/Usage#search-for-a-package)
 
 ### <center> :page_with_curl: For more info , check the **[Wiki Docs](https://github.com/nisrulz/packagehunter/wiki/Usage)** </center>
 

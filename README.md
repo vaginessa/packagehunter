@@ -2,7 +2,7 @@
 
 
 ### Specs
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter)
+[ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion)
 
 ### Featured in
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PackageHunter-green.svg?style=true)](https://android-arsenal.com/details/1/3815) [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23101-blue.svg)](https://www.androiddevdigest.com/digest-101/)
@@ -26,10 +26,11 @@ The library is built for simplicity and approachability. It not only eliminates 
 Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/nisrulz/packagehunter/releases).
 
 # Including in your project
-- PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency
+PackageHunter is available in the Jcenter, so getting it as simple as adding it as a dependency
 ```gradle
-compile 'com.github.nisrulz:packagehunter:1.1.0'
+compile 'com.github.nisrulz:packagehunter:{latest version}'
 ```
+where `{latest version}` corresponds to published version in [ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion)
 
 # Simple example
 

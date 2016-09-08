@@ -17,31 +17,46 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+  compileSdkVersion 24
+  buildToolsVersion "24.0.2"
 
-    defaultConfig {
-        applicationId "github.nisrulz.projectpackagehunter"
-        minSdkVersion 11
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+  signingConfigs {
+    release {
+      try {
+        keyAlias exKEYSTORE_ALIAS
+        keyPassword exKEY_PASSWORD
+        storeFile file(exKEYSTORE_FILEPATH)
+        storePassword exKEYSTORE_PASSWORD
+      } catch (ex) {
+        throw new InvalidUserDataException(
+            "You should define exKEYSTORE_ALIAS, exKEYSTORE_FILEPATH, exKEYSTORE_PASSWORD and exKEY_PASSWORD in gradle.properties.")
+      }
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+  }
+
+  defaultConfig {
+    applicationId "github.nisrulz.projectpackagehunter"
+    minSdkVersion 11
+    targetSdkVersion 24
+    versionCode 1
+    versionName "1.0"
+  }
+  buildTypes {
+    release {
+      signingConfig signingConfigs.release
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  testCompile 'junit:junit:4.12'
 
-    def supportLibVer = '24.2.0'
-    compile "com.android.support:appcompat-v7:$supportLibVer"
-    compile "com.android.support:design:$supportLibVer"
-    compile "com.android.support:cardview-v7:$supportLibVer"
-    compile project(':library')
+  def supportLibVer = '24.2.0'
+  compile "com.android.support:appcompat-v7:$supportLibVer"
+  compile "com.android.support:design:$supportLibVer"
+  compile "com.android.support:cardview-v7:$supportLibVer"
+  compile project(':library')
 }

@@ -2,7 +2,7 @@
 
 
 ### Specs
-[ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion) <a href="http://www.methodscount.com/?lib=com.github.nisrulz%3Apackagehunter%3A1.1.1"><img src="https://img.shields.io/badge/Methods and size-76 | 9 KB-e91e63.svg"/></a>
 
 ### Featured in
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PackageHunter-green.svg?style=true)](https://android-arsenal.com/details/1/3815) [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23101-blue.svg)](https://www.androiddevdigest.com/digest-101/)

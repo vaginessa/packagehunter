@@ -16,8 +16,10 @@ Android library to hunt down package information.
 
 The library is built for simplicity and approachability. It not only eliminates most boilerplate code for dealing with package information, but also provides an easy and simple API to retrieve them and associated data.
 
-### Screenshot of sample app
-![Sc1](https://github.com/nisrulz/packagehunter/blob/master/img/sc1.png) ![Sc2](https://github.com/nisrulz/packagehunter/blob/master/img/sc2.png)
+### App in Playstore
+[![playstore](https://github.com/nisrulz/packagehunter/blob/master/img/google-play-store.png)](https://play.google.com/store/apps/details?id=github.nisrulz.projectpackagehunter)
+
+![Sc1](https://github.com/nisrulz/packagehunter/blob/master/img/sc1.png) ![Sc2](https://github.com/nisrulz/packagehunter/blob/master/img/sc2.png) ![Sc3](https://github.com/nisrulz/packagehunter/blob/master/img/sc3.png) ![Sc4](https://github.com/nisrulz/packagehunter/blob/master/img/sc4.png)
 
 # Changelog
 

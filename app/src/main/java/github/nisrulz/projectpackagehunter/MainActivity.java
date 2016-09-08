@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, DetailActivity.class);
             i.putExtra("data", pkgInfoArrayList.get(position).getPackageName());
             startActivity(i);
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
           }
         }));
   }

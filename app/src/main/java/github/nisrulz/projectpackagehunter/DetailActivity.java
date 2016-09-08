@@ -14,7 +14,8 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_detail);
 
@@ -54,7 +55,9 @@ public class DetailActivity extends AppCompatActivity {
     txt_firsttime.setText("First Install Time : " + getFormattedUpTime(firstInstallTime));
     txt_lastupdated.setText("Last Update Time : " + getFormattedUpTime(lastUpdateTime));
 
-    if (getSupportActionBar() != null) getSupportActionBar().setTitle(appName);
+    if (getSupportActionBar() != null) {
+      getSupportActionBar().setTitle(appName);
+    }
 
     RecyclerView rv = (RecyclerView) findViewById(R.id.rv_detaillist);
     ArrayList<ElementInfo> elementInfoArrayList = new ArrayList<>();
@@ -76,5 +79,13 @@ public class DetailActivity extends AppCompatActivity {
     int hr = (int) ((millis / (1000 * 60 * 60)) % 24);
 
     return String.format(Locale.US, "%02d:%02d:%02d", hr, min, sec);
+  }
+
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
+
+    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    finish();
   }
 }

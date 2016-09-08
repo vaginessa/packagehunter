@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
   private PackageHunter packageHunter;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     // Set On Click
     rv.addOnItemTouchListener(
         new RVItemClickListener(this, new RVItemClickListener.OnItemClickListener() {
-          @Override public void onItemClick(View view, int position) {
+          @Override
+          public void onItemClick(View view, int position) {
             Intent i = new Intent(MainActivity.this, DetailActivity.class);
             i.putExtra("data", pkgInfoArrayList.get(position).getPackageName());
             startActivity(i);
@@ -67,19 +69,22 @@ public class MainActivity extends AppCompatActivity {
         }));
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.menu_main, menu);
     MenuItem searchViewItem = menu.findItem(R.id.action_search);
     final SearchView searchViewAndroidActionBar =
         (SearchView) MenuItemCompat.getActionView(searchViewItem);
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-      @Override public boolean onQueryTextSubmit(String query) {
+      @Override
+      public boolean onQueryTextSubmit(String query) {
         searchViewAndroidActionBar.clearFocus();
         return true;
       }
 
-      @Override public boolean onQueryTextChange(String query) {
+      @Override
+      public boolean onQueryTextChange(String query) {
 
         pkgInfoArrayList = packageHunter.searchInList(query, PackageHunter.PACKAGES);
         adapter.updateWithNewListData(pkgInfoArrayList);
@@ -90,11 +95,17 @@ public class MainActivity extends AppCompatActivity {
     return super.onCreateOptionsMenu(menu);
   }
 
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_refresh: {
         pkgInfoArrayList = packageHunter.getInstalledPackages();
         adapter.updateWithNewListData(pkgInfoArrayList);
+        break;
+      }
+      case R.id.action_about: {
+        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         break;
       }
     }

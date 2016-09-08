@@ -16,4 +16,5 @@
 
 <resources>
   <string name="appName">PackageHunter</string>
+  <string name="about_info">\nOpen sourced at @Github\nhttps://github.com/nisrulz/packagehunter\n\n Built by Nishant Srivastava</string>
 </resources>

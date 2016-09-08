@@ -30,7 +30,7 @@
         <h3>
 <a id="specs" class="anchor" href="#specs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specs</h3>
 
-<p><a href="https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter"><img src="https://maven-badges.herokuapp.com/maven-central/com.github.nisrulz/packagehunter/badge.svg" alt="Maven Central"></a></p>
+<p><a href="https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion"> <img src="https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg" alt="Download"> </a> <a href="http://www.methodscount.com/?lib=com.github.nisrulz%3Apackagehunter%3A1.1.1"><img src="https://img.shields.io/badge/Methods%20and%20size-76%20%7C%209%20KB-e91e63.svg"></a></p>
 
 <h3>
 <a id="featured-in" class="anchor" href="#featured-in" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Featured in</h3>
@@ -56,14 +56,14 @@
 <h1>
 <a id="including-in-your-project" class="anchor" href="#including-in-your-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Including in your project</h1>
 
-<ul>
-<li>PackageHunter is available in the MavenCentral, so getting it as simple as adding it as a dependency</li>
-</ul>
+<p>PackageHunter is available in the Jcenter, so getting it as simple as adding it as a dependency</p>
 
-<div class="highlight highlight-source-groovy-gradle"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>com.github.nisrulz:packagehunter:1.1.0<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-groovy-gradle"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>com.github.nisrulz:packagehunter:{latest version}<span class="pl-pds">'</span></span></pre></div>
 
-<h3>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+<p>where <code>{latest version}</code> corresponds to published version in <a href="https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion"> <img src="https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg" alt="Download"> </a></p>
+
+<h1>
+<a id="simple-example" class="anchor" href="#simple-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simple example</h1>
 
 <p>Create an instance of <code>PackageHunter</code></p>
 
@@ -73,150 +73,17 @@
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">String</span> appName<span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>getAppNameForPkg(packageName);</pre></div>
 
-<h2>
-<a id="to-get-information-from" class="anchor" href="#to-get-information-from" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To get information from</h2>
+<h3>
+<a id="get-information-for" class="anchor" href="#get-information-for" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get information for</h3>
+
+<ul>
+<li><a href="https://github.com/nisrulz/packagehunter/wiki/Usage#specific-package">Specific Package</a></li>
+<li><a href="https://github.com/nisrulz/packagehunter/wiki/Usage#all-packages-in-device">All Packages in Device</a></li>
+<li><a href="https://github.com/nisrulz/packagehunter/wiki/Usage#search-for-a-package">Search for a Package</a></li>
+</ul>
 
 <h3>
-<a id="specific-package" class="anchor" href="#specific-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specific Package</h3>
-
-<p>To get information for a specific <code>packageName</code> , you have the following methods available to you</p>
-
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>functionName</th>
-<th>returns</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Application Name</td>
-<td><code>getAppNameForPkg(packageName)</code></td>
-<td>String</td>
-</tr>
-<tr>
-<td>Version</td>
-<td><code>getVersionForPkg(packageName)</code></td>
-<td>String</td>
-</tr>
-<tr>
-<td>Version Code</td>
-<td><code>getVersionCodeForPkg(packageName)</code></td>
-<td>String</td>
-</tr>
-<tr>
-<td>First install time(ms)</td>
-<td><code>getFirstInstallTimeForPkg(packageName)</code></td>
-<td>long</td>
-</tr>
-<tr>
-<td>Last update time(ms)</td>
-<td><code>getLastUpdatedTimeForPkg(packageName)</code></td>
-<td>long</td>
-</tr>
-<tr>
-<td>Icon</td>
-<td><code>getIconForPkg(packageName)</code></td>
-<td>Drawable</td>
-</tr>
-<tr>
-<td>All Permissions</td>
-<td><code>getPermissionForPkg(packageName)</code></td>
-<td>String[]</td>
-</tr>
-<tr>
-<td>All Services</td>
-<td><code>getServicesForPkg(packageName)</code></td>
-<td>String[]</td>
-</tr>
-<tr>
-<td>All Providers</td>
-<td><code>getProvidersForPkg(packageName)</code></td>
-<td>String[]</td>
-</tr>
-<tr>
-<td>All Receivers</td>
-<td><code>getReceiverForPkg(packageName)</code></td>
-<td>String[]</td>
-</tr>
-<tr>
-<td>All Activities</td>
-<td><code>getActivitiesForPkg(packageName)</code></td>
-<td>String[]</td>
-</tr>
-</tbody>
-</table>
-
-<h3>
-<a id="all-packages-in-device" class="anchor" href="#all-packages-in-device" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>All Packages in Device</h3>
-
-<p>If you want to get the info about whole list of installed applications</p>
-
-<div class="highlight highlight-source-java"><pre><span class="pl-k">ArrayList&lt;<span class="pl-smi">PkgInfo</span>&gt;</span> pkgInfoArrayList <span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>getInstalledPackages()</pre></div>
-
-<p>which will provide you a list of <code>PkgInfo</code> objects each having</p>
-
-<ol>
-<li>Application Name</li>
-<li>Package Name</li>
-<li>Version</li>
-<li>Version Code</li>
-<li>First install time</li>
-<li>Last install time</li>
-</ol>
-
-<h3>
-<a id="search-for-a-package" class="anchor" href="#search-for-a-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Search for a Package</h3>
-
-<p>If you would instead like to search for a package which has a certain feature in all installed packages, you would have to call the below function with a flag.</p>
-
-<div class="highlight highlight-source-java"><pre><span class="pl-k">ArrayList&lt;<span class="pl-smi">PkgInfo</span>&gt;</span> pkgInfoArrayList <span class="pl-k">=</span> packageHunter<span class="pl-k">.</span>searchInList(query, flag);</pre></div>
-
-<p>where flag can be </p>
-
-<table>
-<thead>
-<tr>
-<th>Flag</th>
-<th>Search in feature</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>PackageHunter.APPLICATIONS</code></td>
-<td>Application Name</td>
-</tr>
-<tr>
-<td><code>PackageHunter.PACKAGES</code></td>
-<td>Package Name</td>
-</tr>
-<tr>
-<td><code>PackageHunter.PERMISSIONS</code></td>
-<td>Permissions</td>
-</tr>
-<tr>
-<td><code>PackageHunter.SERVICES</code></td>
-<td>Services</td>
-</tr>
-<tr>
-<td><code>PackageHunter.RECEIVERS</code></td>
-<td>Receivers</td>
-</tr>
-<tr>
-<td><code>PackageHunter.ACTIVITIES</code></td>
-<td>Activities</td>
-</tr>
-<tr>
-<td><code>PackageHunter.PROVIDERS</code></td>
-<td>Providers</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>Checkout the sample app for demo.</p>
-</blockquote>
+<a id="-page_with_curl-for-more-info--check-the-wiki-docs-" class="anchor" href="#-page_with_curl-for-more-info--check-the-wiki-docs-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a> <g-emoji alias="page_with_curl" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c3.png">📃</g-emoji> For more info , check the <strong><a href="https://github.com/nisrulz/packagehunter/wiki/Usage">Wiki Docs</a></strong> </h3>
 
 <h1>
 <a id="pull-requests" class="anchor" href="#pull-requests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pull Requests</h1>
@@ -237,24 +104,6 @@
 <a id="created--maintained-by" class="anchor" href="#created--maintained-by" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Created &amp; Maintained By</h3>
 
 <p><a href="https://github.com/nisrulz">Nishant Srivastava</a> (<a href="https://www.twitter.com/nisrulz">@nisrulz</a>)</p>
-
-<h1>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
-
-<pre><code>Copyright 2016 Nishant Srivastava
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-</code></pre>
       </section>
     </div>
     <footer>

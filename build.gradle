@@ -41,3 +41,23 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
+// Library Info
+ext {
+  //Other
+  supportLibVersion = '25.0.0'
+
+  //Configs
+  publishLibrary = false
+
+  // PackageHunter
+  libVersionCode = 4
+  libVersionName = '1.1.2'
+  libPomUrl = 'https://github.com/nisrulz/packagehunter'
+  libGithubRepo = 'nisrulz/packagehunter'
+
+
+  libModuleName = 'packagehunter'
+  libModuleDesc = 'Android library to hunt down package information'
+  libBintrayName = 'com.github.nisrulz:packagehunter'
+}

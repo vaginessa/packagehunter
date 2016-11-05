@@ -4,8 +4,11 @@
 ### Specs
 [ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion) <a href="http://www.methodscount.com/?lib=com.github.nisrulz%3Apackagehunter%3A1.1.1"><img src="https://img.shields.io/badge/Methods and size-76 | 9 KB-e91e63.svg"/></a>
 
-### Featured in
+### Badges/Featured In
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PackageHunter-green.svg?style=true)](https://android-arsenal.com/details/1/3815) [![AndroidDev Digest](https://img.shields.io/badge/AndroidDev%20Digest-%23101-blue.svg)](https://www.androiddevdigest.com/digest-101/)
+
+**Also included in**
++ [Awesome Android Newsletter #Issue 13](https://android.libhunt.com/newsletter/13)
 
 ### Show some :heart:
 [![GitHub stars](https://img.shields.io/github/stars/nisrulz/packagehunter.svg?style=social&label=Star)](https://github.com/nisrulz/packagehunter) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/packagehunter.svg?style=social&label=Fork)](https://github.com/nisrulz/packagehunter/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/packagehunter.svg?style=social&label=Watch)](https://github.com/nisrulz/packagehunter) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz)  

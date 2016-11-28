@@ -220,7 +220,8 @@ public class PackageHunter {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         icon =
             context.getResources().getDrawable(android.R.drawable.ic_menu_help, context.getTheme());
-      } else {
+      }
+      else {
         //noinspection deprecation
         icon = context.getResources().getDrawable(android.R.drawable.ic_menu_help);
       }
@@ -233,7 +234,8 @@ public class PackageHunter {
     PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PERMISSIONS);
     if (packageInfo.requestedPermissions != null) {
       return packageInfo.requestedPermissions;
-    } else {
+    }
+    else {
       return null;
     }
   }
@@ -246,7 +248,8 @@ public class PackageHunter {
         data.add(packageInfo.services[i].name);
       }
       return data.toArray(new String[data.size()]);
-    } else {
+    }
+    else {
       return null;
     }
   }
@@ -259,7 +262,8 @@ public class PackageHunter {
         data.add(packageInfo.activities[i].name);
       }
       return data.toArray(new String[data.size()]);
-    } else {
+    }
+    else {
       return null;
     }
   }
@@ -272,7 +276,8 @@ public class PackageHunter {
         data.add(packageInfo.providers[i].name);
       }
       return data.toArray(new String[data.size()]);
-    } else {
+    }
+    else {
       return null;
     }
   }
@@ -285,7 +290,8 @@ public class PackageHunter {
         data.add(packageInfo.receivers[i].name);
       }
       return data.toArray(new String[data.size()]);
-    } else {
+    }
+    else {
       return null;
     }
   }

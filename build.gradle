@@ -42,14 +42,13 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-// Library Info
 ext {
   //Other
   supportLibVersion = '25.0.1'
 
-  // PackageHunter
-  libVersionCode = 4
-  libVersionName = '1.1.2'
+  // Library Info
+  libVersionCode = 5
+  libVersionName = '1.1.3'
   libPomUrl = 'https://github.com/nisrulz/packagehunter'
   libGithubRepo = 'nisrulz/packagehunter'
 

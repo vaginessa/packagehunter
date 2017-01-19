@@ -1,6 +1,5 @@
 ![Image](https://github.com/nisrulz/packagehunter/blob/master/img/github_banner.png)
 
-
 ### Specs
 [ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion) <a href="http://www.methodscount.com/?lib=com.github.nisrulz%3Apackagehunter%3A1.1.1"><img src="https://img.shields.io/badge/Methods and size-76 | 9 KB-e91e63.svg"/></a>
 

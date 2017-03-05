@@ -31,6 +31,12 @@
       android:title="Reload"
       app:showAsAction="ifRoom"/>
   <item
+      android:id="@+id/action_privacy"
+      android:title="Privacy Policy"
+      android:icon="@drawable/ic_info_outline_white_24dp"
+      app:showAsAction="ifRoom"/>
+
+  <item
       android:id="@+id/action_about"
       android:icon="@drawable/ic_info_outline_white_24dp"
       android:title="About"

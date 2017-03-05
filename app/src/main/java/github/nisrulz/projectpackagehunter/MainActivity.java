@@ -17,6 +17,7 @@
 package github.nisrulz.projectpackagehunter;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -107,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, AboutActivity.class));
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         break;
+      }
+      case R.id.action_privacy:{
+        Uri uri= Uri.parse("https://cdn.rawgit.com/nisrulz/f142e91b83497ae254499d1d44b4afad/raw/1c46f779a80db0bd4946273acdf8109874984eac/PackageHunterPrivacyPolicy.html");
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(browserIntent);
+
       }
     }
 

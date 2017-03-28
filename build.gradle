@@ -44,11 +44,11 @@ task clean(type: Delete) {
 
 ext {
   //Other
-  supportLibVersion = '25.2.0'
+  supportLibVersion = '25.3.0'
 
   // Library Info
-  libVersionCode = 6
-  libVersionName = '1.1.4'
+  libVersionCode = 7
+  libVersionName = '1.1.5'
   libPomUrl = 'https://github.com/nisrulz/packagehunter'
   libGithubRepo = 'nisrulz/packagehunter'
 

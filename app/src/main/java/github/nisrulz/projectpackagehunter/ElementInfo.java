@@ -42,7 +42,8 @@ class ElementInfo {
     this.header = header;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     if (details != null) {
       super.toString();
       StringBuilder stringBuilder = new StringBuilder();
@@ -50,7 +51,8 @@ class ElementInfo {
         stringBuilder.append(details[i]).append("\n");
       }
       return stringBuilder.toString();
-    } else {
+    }
+    else {
       super.toString();
       return "NA";
     }

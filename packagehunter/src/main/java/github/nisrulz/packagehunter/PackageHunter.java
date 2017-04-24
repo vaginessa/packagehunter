@@ -27,11 +27,6 @@ import java.util.List;
 
 public class PackageHunter {
 
-  private static final String TAG = "PackageHunter";
-  private final PackageManager packageManager;
-
-  private final Context context;
-
   // Flags
   public static final int APPLICATIONS = 0;
   public static final int PACKAGES = 1;
@@ -40,6 +35,9 @@ public class PackageHunter {
   public static final int RECEIVERS = 4;
   public static final int ACTIVITIES = 5;
   public static final int PROVIDERS = 6;
+  private static final String TAG = "PackageHunter";
+  private final PackageManager packageManager;
+  private final Context context;
 
   public PackageHunter(Context context) {
     packageManager = context.getPackageManager();
@@ -140,10 +138,6 @@ public class PackageHunter {
     return pkgInfoArrayList;
   }
 
-  public ArrayList<PkgInfo> getInstalledPackages() {
-    return getAllPackagesInfo(PACKAGES);
-  }
-
   private ArrayList<PkgInfo> getAllPackagesInfo(int flag) {
     ArrayList<PkgInfo> pkgInfoArrayList = new ArrayList<>();
 
@@ -182,6 +176,100 @@ public class PackageHunter {
       }
     }
     return pkgInfoArrayList;
+  }
+
+  public String[] getPermissionForPkg(String packageName) {
+    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PERMISSIONS);
+    if (packageInfo.requestedPermissions != null) {
+      return packageInfo.requestedPermissions;
+    }
+    else {
+      return null;
+    }
+  }
+
+  public String[] getServicesForPkg(String packageName) {
+    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_SERVICES);
+    if (packageInfo.services != null) {
+      ArrayList<String> data = new ArrayList<>(packageInfo.services.length);
+      for (int i = 0; i < packageInfo.services.length; i++) {
+        data.add(packageInfo.services[i].name);
+      }
+      return data.toArray(new String[data.size()]);
+    }
+    else {
+      return null;
+    }
+  }
+
+  public String[] getReceiverForPkg(String packageName) {
+    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_RECEIVERS);
+    if (packageInfo.receivers != null) {
+      ArrayList<String> data = new ArrayList<>(packageInfo.receivers.length);
+      for (int i = 0; i < packageInfo.receivers.length; i++) {
+        data.add(packageInfo.receivers[i].name);
+      }
+      return data.toArray(new String[data.size()]);
+    }
+    else {
+      return null;
+    }
+  }
+
+  public String[] getActivitiesForPkg(String packageName) {
+    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_ACTIVITIES);
+    if (packageInfo.activities != null) {
+      ArrayList<String> data = new ArrayList<>(packageInfo.activities.length);
+      for (int i = 0; i < packageInfo.activities.length; i++) {
+        data.add(packageInfo.activities[i].name);
+      }
+      return data.toArray(new String[data.size()]);
+    }
+    else {
+      return null;
+    }
+  }
+
+  public String[] getProvidersForPkg(String packageName) {
+    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PROVIDERS);
+    if (packageInfo.providers != null) {
+      ArrayList<String> data = new ArrayList<>(packageInfo.providers.length);
+      for (int i = 0; i < packageInfo.providers.length; i++) {
+        data.add(packageInfo.providers[i].name);
+      }
+      return data.toArray(new String[data.size()]);
+    }
+    else {
+      return null;
+    }
+  }
+
+  private PkgInfo getPkgInfoModel(PackageInfo p, int flag) {
+    // Always available
+    PkgInfo newInfo = new PkgInfo();
+    if (p != null) {
+      newInfo.setAppName(p.applicationInfo.loadLabel(packageManager).toString());
+      newInfo.setPackageName(p.packageName);
+      newInfo.setVersionCode(p.versionCode);
+      newInfo.setVersionName(p.versionName);
+      newInfo.setLastUpdateTime(p.lastUpdateTime);
+      newInfo.setFirstInstallTime(p.firstInstallTime);
+    }
+
+    return newInfo;
+  }
+
+  private PackageInfo getPkgInfo(String packageName, int flag) {
+    try {
+      return packageManager.getPackageInfo(packageName, flag);
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public ArrayList<PkgInfo> getInstalledPackages() {
+    return getAllPackagesInfo(PACKAGES);
   }
 
   public String getAppNameForPkg(String packageName) {
@@ -228,95 +316,5 @@ public class PackageHunter {
     }
 
     return icon;
-  }
-
-  public String[] getPermissionForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PERMISSIONS);
-    if (packageInfo.requestedPermissions != null) {
-      return packageInfo.requestedPermissions;
-    }
-    else {
-      return null;
-    }
-  }
-
-  public String[] getServicesForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_SERVICES);
-    if (packageInfo.services != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.services.length);
-      for (int i = 0; i < packageInfo.services.length; i++) {
-        data.add(packageInfo.services[i].name);
-      }
-      return data.toArray(new String[data.size()]);
-    }
-    else {
-      return null;
-    }
-  }
-
-  public String[] getActivitiesForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_ACTIVITIES);
-    if (packageInfo.activities != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.activities.length);
-      for (int i = 0; i < packageInfo.activities.length; i++) {
-        data.add(packageInfo.activities[i].name);
-      }
-      return data.toArray(new String[data.size()]);
-    }
-    else {
-      return null;
-    }
-  }
-
-  public String[] getProvidersForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_PROVIDERS);
-    if (packageInfo.providers != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.providers.length);
-      for (int i = 0; i < packageInfo.providers.length; i++) {
-        data.add(packageInfo.providers[i].name);
-      }
-      return data.toArray(new String[data.size()]);
-    }
-    else {
-      return null;
-    }
-  }
-
-  public String[] getReceiverForPkg(String packageName) {
-    PackageInfo packageInfo = getPkgInfo(packageName, PackageManager.GET_RECEIVERS);
-    if (packageInfo.receivers != null) {
-      ArrayList<String> data = new ArrayList<>(packageInfo.receivers.length);
-      for (int i = 0; i < packageInfo.receivers.length; i++) {
-        data.add(packageInfo.receivers[i].name);
-      }
-      return data.toArray(new String[data.size()]);
-    }
-    else {
-      return null;
-    }
-  }
-
-  private PackageInfo getPkgInfo(String packageName, int flag) {
-    try {
-      return packageManager.getPackageInfo(packageName, flag);
-    } catch (PackageManager.NameNotFoundException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  private PkgInfo getPkgInfoModel(PackageInfo p, int flag) {
-    // Always available
-    PkgInfo newInfo = new PkgInfo();
-    if (p != null) {
-      newInfo.setAppName(p.applicationInfo.loadLabel(packageManager).toString());
-      newInfo.setPackageName(p.packageName);
-      newInfo.setVersionCode(p.versionCode);
-      newInfo.setVersionName(p.versionName);
-      newInfo.setLastUpdateTime(p.lastUpdateTime);
-      newInfo.setFirstInstallTime(p.firstInstallTime);
-    }
-
-    return newInfo;
   }
 }

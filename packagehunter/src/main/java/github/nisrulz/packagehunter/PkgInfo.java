@@ -20,6 +20,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PkgInfo implements Parcelable {
+  public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
+    @Override
+    public PkgInfo createFromParcel(Parcel in) {
+      return new PkgInfo(in);
+    }
+
+    @Override
+    public PkgInfo[] newArray(int size) {
+      return new PkgInfo[size];
+    }
+  };
   private String appName;
   private String packageName;
   private String versionName;
@@ -42,16 +53,6 @@ public class PkgInfo implements Parcelable {
     firstInstallTime = in.readLong();
     lastUpdateTime = in.readLong();
   }
-
-  public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
-    @Override public PkgInfo createFromParcel(Parcel in) {
-      return new PkgInfo(in);
-    }
-
-    @Override public PkgInfo[] newArray(int size) {
-      return new PkgInfo[size];
-    }
-  };
 
   public long getFirstInstallTime() {
     return firstInstallTime;
@@ -101,7 +102,8 @@ public class PkgInfo implements Parcelable {
     this.versionName = versionName;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     super.toString();
     return "AppName : "
         + appName
@@ -113,11 +115,13 @@ public class PkgInfo implements Parcelable {
         + versionCode;
   }
 
-  @Override public int describeContents() {
+  @Override
+  public int describeContents() {
     return 0;
   }
 
-  @Override public void writeToParcel(Parcel parcel, int i) {
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(appName);
     parcel.writeString(packageName);
     parcel.writeString(versionName);

@@ -30,15 +30,16 @@ import java.util.List;
 
 class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
 
-  private List<PkgInfo> dataList;
   private final PackageHunter packageHunter;
+  private List<PkgInfo> dataList;
 
   public RVMainAdapter(Context context, List<PkgInfo> dataList) {
     packageHunter = new PackageHunter(context);
     this.dataList = dataList;
   }
 
-  @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override
+  public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_main_item, parent, false);
@@ -46,7 +47,8 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
     return new ItemViewHolder(view);
   }
 
-  @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
+  @Override
+  public void onBindViewHolder(ItemViewHolder holder, int position) {
     holder.txt_appname.setText(dataList.get(position).getAppName());
     holder.txt_pkgname.setText(dataList.get(position).getPackageName());
 
@@ -54,8 +56,16 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
     holder.icon.setImageDrawable(icon);
   }
 
-  @Override public int getItemCount() {
+  @Override
+  public int getItemCount() {
     return dataList.size();
+  }
+
+  public void updateWithNewListData(List<PkgInfo> newDataList) {
+    dataList.clear();
+    dataList = null;
+    dataList = newDataList;
+    notifyDataSetChanged();
   }
 
   public class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -69,12 +79,5 @@ class RVMainAdapter extends RecyclerView.Adapter<RVMainAdapter.ItemViewHolder> {
       txt_pkgname = (TextView) itemView.findViewById(R.id.txtvw_pkgname);
       icon = (ImageView) itemView.findViewById(R.id.imgvw_icn);
     }
-  }
-
-  public void updateWithNewListData(List<PkgInfo> newDataList) {
-    dataList.clear();
-    dataList = null;
-    dataList = newDataList;
-    notifyDataSetChanged();
   }
 }

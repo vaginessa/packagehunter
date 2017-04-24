@@ -31,7 +31,8 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
     this.dataList = dataList;
   }
 
-  @Override public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override
+  public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_details_item, parent, false);
@@ -39,12 +40,14 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
     return new ItemViewHolder(view);
   }
 
-  @Override public void onBindViewHolder(ItemViewHolder holder, int position) {
+  @Override
+  public void onBindViewHolder(ItemViewHolder holder, int position) {
     holder.txtvw_header.setText(dataList.get(position).getHeader());
     holder.txtvw_details.setText(dataList.get(position).toString());
   }
 
-  @Override public int getItemCount() {
+  @Override
+  public int getItemCount() {
     return dataList.size();
   }
 
@@ -58,5 +61,4 @@ class RVDetailsAdapter extends RecyclerView.Adapter<RVDetailsAdapter.ItemViewHol
       txtvw_details = (TextView) itemView.findViewById(R.id.txtvw_details);
     }
   }
-
 }

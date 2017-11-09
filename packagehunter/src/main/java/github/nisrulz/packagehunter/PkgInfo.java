@@ -20,114 +20,121 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PkgInfo implements Parcelable {
-  public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
-    @Override
-    public PkgInfo createFromParcel(Parcel in) {
-      return new PkgInfo(in);
+
+    public static final Creator<PkgInfo> CREATOR = new Creator<PkgInfo>() {
+        @Override
+        public PkgInfo createFromParcel(Parcel in) {
+            return new PkgInfo(in);
+        }
+
+        @Override
+        public PkgInfo[] newArray(int size) {
+            return new PkgInfo[size];
+        }
+    };
+
+    private String appName;
+
+    private long firstInstallTime;
+
+    private long lastUpdateTime;
+
+    private String packageName;
+
+    private int versionCode = 0;
+
+    private String versionName;
+
+    public PkgInfo() {
+        versionName = "0.0";
+        versionCode = 0;
+        firstInstallTime = 0;
+        lastUpdateTime = 0;
+    }
+
+    protected PkgInfo(Parcel in) {
+        appName = in.readString();
+        packageName = in.readString();
+        versionName = in.readString();
+        versionCode = in.readInt();
+        firstInstallTime = in.readLong();
+        lastUpdateTime = in.readLong();
     }
 
     @Override
-    public PkgInfo[] newArray(int size) {
-      return new PkgInfo[size];
+    public int describeContents() {
+        return 0;
     }
-  };
-  private String appName;
-  private String packageName;
-  private String versionName;
-  private int versionCode = 0;
-  private long firstInstallTime;
-  private long lastUpdateTime;
 
-  public PkgInfo() {
-    versionName = "0.0";
-    versionCode = 0;
-    firstInstallTime = 0;
-    lastUpdateTime = 0;
-  }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(appName);
+        parcel.writeString(packageName);
+        parcel.writeString(versionName);
+        parcel.writeInt(versionCode);
+        parcel.writeLong(firstInstallTime);
+        parcel.writeLong(lastUpdateTime);
+    }
 
-  protected PkgInfo(Parcel in) {
-    appName = in.readString();
-    packageName = in.readString();
-    versionName = in.readString();
-    versionCode = in.readInt();
-    firstInstallTime = in.readLong();
-    lastUpdateTime = in.readLong();
-  }
+    public String getAppName() {
+        return appName;
+    }
 
-  public long getFirstInstallTime() {
-    return firstInstallTime;
-  }
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
-  public void setFirstInstallTime(long firstInstallTime) {
-    this.firstInstallTime = firstInstallTime;
-  }
+    public long getFirstInstallTime() {
+        return firstInstallTime;
+    }
 
-  public long getLastUpdateTime() {
-    return lastUpdateTime;
-  }
+    public void setFirstInstallTime(long firstInstallTime) {
+        this.firstInstallTime = firstInstallTime;
+    }
 
-  public void setLastUpdateTime(long lastUpdateTime) {
-    this.lastUpdateTime = lastUpdateTime;
-  }
+    public long getLastUpdateTime() {
+        return lastUpdateTime;
+    }
 
-  public String getAppName() {
-    return appName;
-  }
+    public void setLastUpdateTime(long lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
 
-  public void setAppName(String appName) {
-    this.appName = appName;
-  }
+    public String getPackageName() {
+        return packageName;
+    }
 
-  public String getPackageName() {
-    return packageName;
-  }
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
-  public void setPackageName(String packageName) {
-    this.packageName = packageName;
-  }
+    public int getVersionCode() {
+        return versionCode;
+    }
 
-  public int getVersionCode() {
-    return versionCode;
-  }
+    public void setVersionCode(int versionCode) {
+        this.versionCode = versionCode;
+    }
 
-  public void setVersionCode(int versionCode) {
-    this.versionCode = versionCode;
-  }
+    public String getVersionName() {
+        return versionName;
+    }
 
-  public String getVersionName() {
-    return versionName;
-  }
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
+    }
 
-  public void setVersionName(String versionName) {
-    this.versionName = versionName;
-  }
-
-  @Override
-  public String toString() {
-    super.toString();
-    return "AppName : "
-        + appName
-        + " | PackageName :"
-        + packageName
-        + "\nVersion :"
-        + versionName
-        + " | VersionCode :"
-        + versionCode;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel parcel, int i) {
-    parcel.writeString(appName);
-    parcel.writeString(packageName);
-    parcel.writeString(versionName);
-    parcel.writeInt(versionCode);
-    parcel.writeLong(firstInstallTime);
-    parcel.writeLong(lastUpdateTime);
-  }
+    @Override
+    public String toString() {
+        super.toString();
+        return "AppName : "
+                + appName
+                + " | PackageName :"
+                + packageName
+                + "\nVersion :"
+                + versionName
+                + " | VersionCode :"
+                + versionCode;
+    }
 }
 

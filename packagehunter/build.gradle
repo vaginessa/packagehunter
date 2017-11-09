@@ -17,26 +17,26 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
-  defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode rootProject.ext.libVersionCode
-    versionName rootProject.ext.libVersionName
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.libVersionCode
+        versionName rootProject.ext.libVersionName
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
 }
 
 apply from: 'https://raw.githubusercontent.com/nisrulz/JCenter/master/nishant-config.gradle'

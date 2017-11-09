@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2016 Nishant Srivastava
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,12 @@
   -->
 
 <resources>
-  <color name="colorPrimary">#8E44AD</color>
-  <color name="colorPrimaryDark">#9B59B6</color>
-  <color name="colorAccent">#34495E</color>
+    <color name="colorPrimary">#8E44AD</color>
+    <color name="colorPrimaryDark">#9B59B6</color>
+    <color name="colorAccent">#34495E</color>
 
-  <color name="labelbg_1">#7F8C8D</color>
-  <color name="labelbg_2">#95A5A6</color>
-  <color name="labelbg_3">#BDC3C7</color>
+    <color name="labelbg_1">#7F8C8D</color>
+    <color name="labelbg_2">#95A5A6</color>
+    <color name="labelbg_3">#BDC3C7</color>
 
 </resources>

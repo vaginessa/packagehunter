@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2016 Nishant Srivastava
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,27 +17,27 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-      android:id="@+id/action_search"
-      android:icon="@drawable/ic_search_white_24dp"
-      android:title="Search"
-      app:actionViewClass="android.support.v7.widget.SearchView"
-      app:showAsAction="always|collapseActionView"/>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
 
-  <item
-      android:id="@+id/action_refresh"
-      android:icon="@drawable/ic_refresh_white_24dp"
-      android:title="Reload"
-      app:showAsAction="ifRoom"/>
-  <item
-      android:id="@+id/action_privacy"
-      android:icon="@drawable/ic_info_outline_white_24dp"
-      android:title="Privacy Policy"
-      app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh_white_24dp"
+        android:title="Reload"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_privacy"
+        android:icon="@drawable/ic_info_outline_white_24dp"
+        android:title="Privacy Policy"
+        app:showAsAction="ifRoom" />
 
-  <item
-      android:id="@+id/action_about"
-      android:icon="@drawable/ic_info_outline_white_24dp"
-      android:title="About"
-      app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_info_outline_white_24dp"
+        android:title="About"
+        app:showAsAction="ifRoom" />
 </menu>

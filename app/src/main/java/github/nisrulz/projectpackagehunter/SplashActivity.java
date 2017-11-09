@@ -23,19 +23,19 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_splash);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-    Handler handler = new Handler();
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish();
-      }
-    }, 600);
-  }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        }, 600);
+    }
 }

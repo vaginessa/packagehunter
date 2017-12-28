@@ -86,7 +86,7 @@ Starting with `1.1.0`, Changes exist in the [releases tab](https://github.com/ni
 # Including in your project
 PackageHunter is available in the Jcenter, so getting it as simple as adding it as a dependency
 ```gradle
-compile 'com.github.nisrulz:packagehunter:{latest version}'
+implementation 'com.github.nisrulz:packagehunter:{latest version}'
 ```
 where `{latest version}` corresponds to published version in [ ![Download](https://api.bintray.com/packages/nisrulz/maven/com.github.nisrulz%3Apackagehunter/images/download.svg) ](https://bintray.com/nisrulz/maven/com.github.nisrulz%3Apackagehunter/_latestVersion)
 
